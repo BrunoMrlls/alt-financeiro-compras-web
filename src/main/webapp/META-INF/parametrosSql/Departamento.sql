@@ -1,0 +1,14 @@
+insert into departamento (sigla,nome)values('PF','PESSOA FÍSICA');
+insert into departamento (sigla,nome)values('PJ','PESSOA JURÍDICA');
+insert into departamento (sigla,nome)values('UC','USUÁRIO CONTÍNUO');
+insert into departamento (sigla,nome)values('FI','FILIAL');
+insert into departamento (sigla,nome)values('EC','E-COMMERCE');
+insert into departamento (sigla,nome)values('PL','PLANTÃO');
+insert into departamento (sigla,nome)values('RE','REPRESENTANTE');
+insert into departamento (sigla,nome)values('CO','COMERCIAL');
+insert into departamento (sigla,nome)values('OP','OPERACIONAL');
+insert into departamento (sigla,nome)values('RH','RECURSOS HUMANOS');
+insert into departamento (sigla,nome)values('FIN','FINANCEIRO');
+insert into departamento (sigla,nome)values('CT','CONTROLADORIA');
+insert into departamento (sigla,nome)values('FT','FATURAMENTO');
+insert into departamento (sigla,nome)values('TI','TECNOLOGIA DA INFORMAÇÃO');

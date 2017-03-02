@@ -1,0 +1,15 @@
+insert into classif_entidade (descricao)values('CLIENTE PREFERECIAL');
+insert into classif_entidade (descricao)values('FORNECEDOR');
+insert into classif_entidade (descricao)values('EMPRESA USUÁRIA');
+insert into classif_entidade (descricao)values('FUNCIONÁRIO');
+insert into classif_entidade (descricao)values('PROFISSIONAL LIBERAL');
+insert into classif_entidade (descricao)values('VENDEDOR');
+insert into classif_entidade (descricao)values('MARCA');
+insert into classif_entidade (descricao)values('EMPRESA CONVENIADA');
+insert into classif_entidade (descricao)values('FINANCIAMENTOS');
+insert into classif_entidade (descricao)values('CLIENTE- EMPRESA');
+insert into classif_entidade (descricao)values('CLIENTE');
+insert into classif_entidade (descricao)values('FORNECEDOR NÃO COMERCIALIZAVEL');
+insert into classif_entidade (descricao)values('MEDICO VIP');
+insert into classif_entidade (descricao)values('MEDICO');
+insert into classif_entidade (descricao)values('TRANSPORTADORA');
