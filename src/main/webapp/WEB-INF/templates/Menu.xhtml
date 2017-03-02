@@ -13,13 +13,15 @@
 
 				<p:panelMenu style="width:600px">
 
-					<p:submenu label="Cadastros">						
+					<p:submenu label="Cadastros">
 
 						<p:submenu label="Parâmetros Gerais">
-							<p:menuitem value="Departamento" icon="ui-icon-arrowrefresh-1-w" outcome="/departamento/PesquisaDepartamentos.xhtml"/>
+							<p:menuitem value="Departamento" icon="ui-icon-arrowrefresh-1-w"
+								outcome="/departamento/PesquisaDepartamentos.xhtml" />
 							<p:menuitem value="Usuarios" icon="ui-icon-arrowrefresh-1-w" />
 							<p:menuitem value="Classif Entidades"
-								icon="ui-icon-arrowrefresh-1-w" />
+								icon="ui-icon-arrowrefresh-1-w" 
+								outcome="/classificacao/entidade/PesquisaClassifEntidades.xhtml"/>
 							<p:menuitem value="Empresa Usuária"
 								icon="ui-icon-arrowrefresh-1-w" />
 							<p:menuitem value="Objeto Controle"
@@ -27,7 +29,7 @@
 							<p:menuitem value="Tipos Objeto Controle"
 								icon="ui-icon-arrowrefresh-1-w" />
 						</p:submenu>
-						<p:separator />						
+						<p:separator />
 
 						<p:submenu label="Entidades">
 							<p:menuitem value="Vendedores" icon="ui-icon-arrowrefresh-1-w" />
@@ -38,7 +40,7 @@
 								icon="ui-icon-arrowrefresh-1-w" />
 							<p:menuitem value="Funcionários" icon="ui-icon-arrowrefresh-1-w" />
 						</p:submenu>
-						<p:separator />						
+						<p:separator />
 
 						<p:submenu label="Produtos">
 							<p:menuitem value="Unidade de Medidas"
@@ -55,8 +57,15 @@
 							<p:separator />
 							<p:menuitem value="Produto" icon="ui-icon-arrowrefresh-1-w" />
 						</p:submenu>
+					</p:submenu>
 
-
+					<p:submenu label="Compras">
+						<p:submenu label="Nota Fiscal">
+						
+						<p:menuitem value="Nota de Compra"
+								icon="ui-icon-arrowrefresh-1-w" />						
+						
+						</p:submenu>
 					</p:submenu>
 
 				</p:panelMenu>
