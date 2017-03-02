@@ -9,7 +9,7 @@
 		<ul>
 
 			<h:form>
-				<p:growl autoUpdate="true" />
+				<p:growl autoUpdate="false" />
 
 				<p:panelMenu style="width:600px">
 
@@ -19,9 +19,9 @@
 							<p:menuitem value="Departamento" icon="ui-icon-arrowrefresh-1-w"
 								outcome="/departamento/PesquisaDepartamentos.xhtml" />
 							<p:menuitem value="Usuarios" icon="ui-icon-arrowrefresh-1-w" />
-							<p:menuitem value="Classif Entidades"
-								icon="ui-icon-arrowrefresh-1-w" 
-								outcome="/classificacao/entidade/PesquisaClassifEntidades.xhtml"/>
+							<p:menuitem value="Classificação Entidades"
+								icon="ui-icon-arrowrefresh-1-w"
+								outcome="/classificacao/entidade/PesquisaClassifEntidades.xhtml" />
 							<p:menuitem value="Empresa Usuária"
 								icon="ui-icon-arrowrefresh-1-w" />
 							<p:menuitem value="Objeto Controle"
@@ -37,8 +37,10 @@
 								icon="ui-icon-arrowrefresh-1-w" />
 							<p:menuitem value="Pessoa Física" icon="ui-icon-arrowrefresh-1-w" />
 							<p:menuitem value="Outros Credores"
-								icon="ui-icon-arrowrefresh-1-w" />
-							<p:menuitem value="Funcionários" icon="ui-icon-arrowrefresh-1-w" />
+								icon="ui-icon-arrowrefresh-1-w"
+								outcome="/entidades/outroCredor/PesquisaOutrosCredores.xhtml" />
+							<p:menuitem value="Funcionários" icon="ui-icon-arrowrefresh-1-w"
+								outcome="/entidades/funcionario/PesquisaFuncionarios.xhtml" />
 						</p:submenu>
 						<p:separator />
 
@@ -61,10 +63,10 @@
 
 					<p:submenu label="Compras">
 						<p:submenu label="Nota Fiscal">
-						
-						<p:menuitem value="Nota de Compra"
-								icon="ui-icon-arrowrefresh-1-w" />						
-						
+
+							<p:menuitem value="Nota de Compra"
+								icon="ui-icon-arrowrefresh-1-w" />
+
 						</p:submenu>
 					</p:submenu>
 
