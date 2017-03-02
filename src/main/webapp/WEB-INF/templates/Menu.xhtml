@@ -34,8 +34,10 @@
 						<p:submenu label="Entidades">
 							<p:menuitem value="Vendedores" icon="ui-icon-arrowrefresh-1-w" />
 							<p:menuitem value="Pessoa Jurídica"
-								icon="ui-icon-arrowrefresh-1-w" />
-							<p:menuitem value="Pessoa Física" icon="ui-icon-arrowrefresh-1-w" />
+								icon="ui-icon-arrowrefresh-1-w" 
+								outcome="/entidades/pessoaJuridica/PesquisaPessoasJuridicas.xhtml"/>
+							<p:menuitem value="Pessoa Física" icon="ui-icon-arrowrefresh-1-w" 
+							outcome="/entidades/pessoaFisica/PesquisaPessoasFisicas.xhtml"/>
 							<p:menuitem value="Outros Credores"
 								icon="ui-icon-arrowrefresh-1-w"
 								outcome="/entidades/outroCredor/PesquisaOutrosCredores.xhtml" />
@@ -69,6 +71,20 @@
 
 						</p:submenu>
 					</p:submenu>
+
+					<p:submenu label="Financeiro">
+						<p:submenu label="Pagamentos">
+
+							<p:menuitem value="Pagamento Banco"
+								icon="ui-icon-arrowrefresh-1-w" />
+							<p:menuitem value="Pagamento Caixa/Dinheiro"
+								icon="ui-icon-arrowrefresh-1-w" />
+							<p:menuitem value="Pagamento Cheque"
+								icon="ui-icon-arrowrefresh-1-w" />
+
+						</p:submenu>
+					</p:submenu>
+
 
 				</p:panelMenu>
 

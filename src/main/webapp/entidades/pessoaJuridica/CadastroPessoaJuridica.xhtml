@@ -1,0 +1,502 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+	<ui:define name="titulo">#{cadastroPessoaJuridicaBean.editando ? 'Edição de pessoa juridica' : 'Nova pessoa juridica'}</ui:define>
+
+	<ui:define name="content">
+
+		<f:metadata>
+			<o:viewParam name="pessoaJuridica"
+				value="#{cadastroPessoaJuridicaBean.pessoaJuridica}" />
+				<f:viewAction action="#{cadastroPessoaJuridicaBean.inicializar}"></f:viewAction>
+		</f:metadata>
+
+		<h2>#{cadastroPessoaJuridicaBean.editando ? 'Edição de pessoa juridica' : 'Nova pessoa juridica'}</h2>
+
+		<h:form id="frmCadastro">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:column>
+				<i><b> <p:outputLabel value="Código " for="codigo" /> <p:inputText
+							id="codigo" size="20" maxlength="20"
+							value="#{cadastroPessoaJuridicaBean.pessoaJuridica.codigo}"
+							readonly="true" /></b></i>
+			</p:column>
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroPessoaJuridicaBean.salvar}" update="frmCadastro" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa"
+						outcome="/entidades/pessoaJuridica/PesquisaPessoasJuridicas" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="3" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:column>
+					<p:outputLabel value="Nome" for="nome" />
+					<br />
+					<p:inputText id="nome" size="60" maxlength="80"
+						value="#{cadastroPessoaJuridicaBean.pessoaJuridica.nome}" />
+				</p:column>
+
+				<p:column>
+					<p:outputLabel value="Nome Fantasia" for="nomeFantasia" />
+					<br />
+					<p:inputText id="nomeFantasia" size="30" maxlength="60"
+						required="true" requiredMessage="O nome fantasia é obrigatório"
+						value="#{cadastroPessoaJuridicaBean.pessoaJuridica.nomeFantasia}" />
+				</p:column>
+
+				<p:column>
+					<h:outputText value="CNPJ" />
+					<br />
+					<p:inputMask mask="99.999.999/9999-99" required="true"
+						requiredMessage="O CNPJ é obrigatório" size="18" maxlength="18"
+						value="#{cadastroPessoaJuridicaBean.pessoaJuridica.inscricaoFederal}" />
+				</p:column>
+
+				<p:column>
+					<p:outputLabel value="Inscrição Estadual" for="inscricaoEstadual" />
+					<br />
+					<p:inputText id="inscricaoEstadual" size="20" maxlength="20"
+						value="#{cadastroPessoaJuridicaBean.pessoaJuridica.inscricaoEstadual}" />
+				</p:column>
+
+				<p:column>
+					<p:outputLabel value="RET" for="retministerioAgricultura" />
+					<br />
+					<p:inputText id="retministerioAgricultura" size="20" maxlength="20"
+						value="#{cadastroPessoaJuridicaBean.pessoaJuridica.retministerioAgricultura}" />
+				</p:column>
+
+				<p:column>
+					<p:outputLabel value="Classificação da Entidade" for="classifEntidade" />
+					<br />
+					<p:selectOneMenu id="classifEntidade"
+						value="#{cadastroPessoaJuridicaBean.pessoaJuridica.classifEntidade}">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems
+							value="#{cadastroPessoaJuridicaBean.classifEntidades}"
+							var="classifEntidades" itemLabel="#{classifEntidades.nome}"
+							itemValue="#{classifEntidades}" />
+					</p:selectOneMenu>
+				</p:column>
+
+			</p:panelGrid>
+
+			<h:panelGrid style="width:100%;" columns="3" id="painel2" columnClasses="rotulo, campo">
+				<h:panelGroup>
+					<p:outputLabel value="Empresa Nacional " for="simplesNacional" />
+					<h:selectBooleanCheckbox
+						value="#{cadastroPessoaJuridicaBean.pessoaJuridica.simplesNacional}"
+						id="simplesNacional" />
+					<h:message for="simplesNacional" />
+
+					<p:outputLabel value="Contribuinte ICMS " for="contribuinteIcms" />
+					<h:selectBooleanCheckbox
+						value="#{cadastroPessoaJuridicaBean.pessoaJuridica.contribuinteIcms}"
+						id="contribuinteIcms" />
+					<h:message for="contribuinteIcms" />
+
+					<p:outputLabel value="ICMS Diferido " for="icmsDiferimento" />
+					<h:selectBooleanCheckbox
+						value="#{cadastroPessoaJuridicaBean.pessoaJuridica.icmsDiferimento}"
+						id="icmsDiferimento" />
+					<h:message for="icmsDiferimento" />
+
+					<p:outputLabel value="Ativo " for="cadastroAtivo" />
+					<h:selectBooleanCheckbox
+						value="#{cadastroPessoaJuridicaBean.pessoaJuridica.cadastroAtivo}"
+						id="cadastroAtivo" />
+					<h:message for="cadastroAtivo" />
+				</h:panelGroup>
+			</h:panelGrid>
+
+			<!-- endereço estabelecimento -->
+
+			<p:tabView>
+				<p:tab title="ENDEREÇO">
+					<h:panelGrid id="gridEndereco" columns="3"
+						style="width: 100%; margin-top: 0px" columnClasses="campo">
+
+						<h:column>
+							<p:outputLabel value="Tipo Logradouro" for="tipoLogradouro" />
+							<br />
+							<p:selectOneMenu id="tipoLogradouro"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.tipoLogradouro}">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems
+									value="#{cadastroPessoaJuridicaBean.tipoLogradouros}"
+									var="tipoLogradouro" itemLabel="#{tipoLogradouro.descricao}"
+									itemValue="#{tipoLogradouro}" />
+							</p:selectOneMenu>
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Logradouro" for="logradouro" />
+							<br />
+							<p:inputText id="logradouro" size="60" maxlength="60"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.logradouro}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Numero" for="numero" />
+							<br />
+							<p:inputText id="numero" size="10" maxlength="10"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.numero}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Complemento" for="complemento" />
+							<br />
+							<p:inputText id="complemento" size="60" maxlength="60"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.complemento}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Bairro" for="bairro" />
+							<br />
+							<p:inputText id="bairro" size="40" maxlength="40"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.bairro}" />
+						</h:column>
+
+						<h:column>
+							<h:outputText value="CEP" />
+							<br />
+							<p:inputMask mask="99999-999" size="9" maxlength="9"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.cep}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Cidade" for="cidade" />
+							<br />
+							<p:inputText id="cidade" size="40" maxlength="40"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.cidade}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="UF" for="uf" />
+							<br />
+							<p:inputText id="uf" size="2" maxlength="2"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.uf}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Pais" for="pais" />
+							<br />
+							<p:inputText id="pais" size="40" maxlength="40"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.pais}" />
+						</h:column>
+
+					</h:panelGrid>
+				</p:tab>
+
+				<!-- endereço cobrança -->
+
+				<p:tab title="ENDEREÇO COBRANÇA">
+					<h:panelGrid id="griCobranca" columns="3"
+						style="width: 100%; margin-top: 0px" columnClasses="campo">
+
+						<h:column>
+							<p:outputLabel value="Tipo Logradouro"
+								for="tipoLogradouroCobranca" />
+							<br />
+							<p:selectOneMenu id="tipoLogradouroCobranca"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.tipoLogradouroCobranca}">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems
+									value="#{cadastroPessoaJuridicaBean.tipoLogradouros}"
+									var="tipoLogradouroCobranca"
+									itemLabel="#{tipoLogradouroCobranca.descricao}"
+									itemValue="#{tipoLogradouroCobranca}" />
+							</p:selectOneMenu>
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Logradouro" for="logradouroCobranca" />
+							<br />
+							<p:inputText id="logradouroCobranca" size="60" maxlength="60"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.logradouroCobranca}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Numero" for="numeroCobranca" />
+							<br />
+							<p:inputText id="numeroCobranca" size="10" maxlength="10"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.numeroCobranca}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Complemento" for="complementoCobranca" />
+							<br />
+							<p:inputText id="complementoCobranca" size="60" maxlength="60"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.complementoCobranca}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Bairro" for="bairroCobranca" />
+							<br />
+							<p:inputText id="bairroCobranca" size="40" maxlength="40"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.bairroCobranca}" />
+						</h:column>
+
+						<h:column>
+							<h:outputText value="CEP" />
+							<br />
+							<p:inputMask mask="99999-999" size="9" maxlength="9"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.cepCobranca}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Cidade" for="cidadeCobranca" />
+							<br />
+							<p:inputText id="cidadeCobranca" size="40" maxlength="40"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.cidadeCobranca}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="UF" for="ufCobranca" />
+							<br />
+							<p:inputText id="ufCobranca" size="2" maxlength="2"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.ufCobranca}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Pais" for="paisCobranca" />
+							<br />
+							<p:inputText id="paisCobranca" size="40" maxlength="40"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.paisCobranca}" />
+						</h:column>
+
+					</h:panelGrid>
+				</p:tab>
+
+				<!-- endereço entrega -->
+
+				<p:tab title="ENDEREÇO ENTREGA">
+					<h:panelGrid id="gridEntrega" columns="3"
+						style="width: 100%; margin-top: 0px" columnClasses="campo">
+
+						<h:column>
+							<p:outputLabel value="Tipo Logradouro"
+								for="tipoLogradouroEntrega" />
+							<br />
+							<p:selectOneMenu id="tipoLogradouroEntrega"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.tipoLogradouroEntrega}">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems
+									value="#{cadastroPessoaJuridicaBean.tipoLogradouros}"
+									var="tipoLogradouroEntrega"
+									itemLabel="#{tipoLogradouroEntrega.descricao}"
+									itemValue="#{tipoLogradouroEntrega}" />
+							</p:selectOneMenu>
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Logradouro" for="logradouroEntrega" />
+							<br />
+							<p:inputText id="logradouroEntrega" size="60" maxlength="60"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.logradouroEntrega}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Numero" for="numeroEntrega" />
+							<br />
+							<p:inputText id="numeroEntrega" size="10" maxlength="10"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.numeroEntrega}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Complemento" for="complementoEntrega" />
+							<br />
+							<p:inputText id="complementoEntrega" size="60" maxlength="60"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.complementoEntrega}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Bairro" for="bairroEntrega" />
+							<br />
+							<p:inputText id="bairroEntrega" size="40" maxlength="40"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.bairroEntrega}" />
+						</h:column>
+
+						<h:column>
+							<h:outputText value="CEP" />
+							<br />
+							<p:inputMask mask="99999-999" size="9" maxlength="9"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.cepEntrega}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Cidade" for="cidadeEntrega" />
+							<br />
+							<p:inputText id="cidadeEntrega" size="40" maxlength="40"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.cidadeEntrega}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="UF" for="ufEntrega" />
+							<br />
+							<p:inputText id="ufEntrega" size="2" maxlength="2"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.ufEntrega}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Pais" for="paisEntrega" />
+							<br />
+							<p:inputText id="paisEntrega" size="40" maxlength="40"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.paisEntrega}" />
+						</h:column>
+
+					</h:panelGrid>
+				</p:tab>
+
+				<!-- contatos -->
+
+				<p:tab title="CONTATO">
+					<h:panelGrid id="gridContato" columns="6"
+						style="width: 100%; margin-top: 0px" columnClasses="campo">
+
+						<h:column>
+							<p:outputLabel value="Tipo Telefone" for="tipoTelefone1" />
+							<br />
+							<p:selectOneMenu id="tipoTelefone1"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.tipoTelefone1}">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems
+									value="#{cadastroPessoaJuridicaBean.tipoTelefones}"
+									var="tipoTelefone1" itemLabel="#{tipoTelefone1.descricao}"
+									itemValue="#{tipoTelefone1}" />
+							</p:selectOneMenu>
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="DDD" for="ddd1" />
+							<br />
+							<p:inputText id="ddd1" size="3" maxlength="3"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.ddd1}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Número Tel" for="numeroTel1" />
+							<br />
+							<p:inputText id="numeroTel1" size="12" maxlength="12"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.numeroTel1}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Contato" for="contato1" />
+							<br />
+							<p:inputText id="contato1" size="30" maxlength="30"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.contato1}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Email" for="email1" />
+							<br />
+							<p:inputText id="email1" size="60" maxlength="100"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.email1}" />
+						</h:column>
+
+						<!-- contato2 -->
+
+						<h:column>
+							<p:outputLabel value="Tipo Telefone" for="tipoTelefone2" />
+							<br />
+							<p:selectOneMenu id="tipoTelefone2"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.tipoTelefone2}">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems
+									value="#{cadastroPessoaJuridicaBean.tipoTelefones}"
+									var="tipoTelefone2" itemLabel="#{tipoTelefone2.descricao}"
+									itemValue="#{tipoTelefone2}" />
+							</p:selectOneMenu>
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="DDD 2" for="ddd2" />
+							<br />
+							<p:inputText id="ddd2" size="3" maxlength="3"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.ddd2}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Número Tel 2" for="numeroTel2" />
+							<br />
+							<p:inputText id="numeroTel2" size="12" maxlength="12"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.numeroTel2}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Contato 2" for="contato2" />
+							<br />
+							<p:inputText id="contato2" size="30" maxlength="30"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.contato2}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Email 2" for="email2" />
+							<br />
+							<p:inputText id="email2" size="60" maxlength="100"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.email2}" />
+						</h:column>
+
+						<!-- contato3 -->
+
+						<h:column>
+							<p:outputLabel value="Tipo Telefone" for="tipoTelefone3" />
+							<br />
+							<p:selectOneMenu id="tipoTelefone3"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.tipoTelefone3}">
+								<f:selectItem itemLabel="Selecione" />
+								<f:selectItems
+									value="#{cadastroPessoaJuridicaBean.tipoTelefones}"
+									var="tipoTelefone3" itemLabel="#{tipoTelefone3.descricao}"
+									itemValue="#{tipoTelefone3}" />
+							</p:selectOneMenu>
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="DDD 3" for="ddd3" />
+							<br />
+							<p:inputText id="ddd3" size="3" maxlength="3"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.ddd3}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Número Tel 3" for="numeroTel3" />
+							<br />
+							<p:inputText id="numeroTel3" size="12" maxlength="12"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.numeroTel3}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Contato 3" for="contato3" />
+							<br />
+							<p:inputText id="contato3" size="30" maxlength="30"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.contato3}" />
+						</h:column>
+
+						<h:column>
+							<p:outputLabel value="Email 3" for="email3" />
+							<br />
+							<p:inputText id="email3" size="60" maxlength="100"
+								value="#{cadastroPessoaJuridicaBean.pessoaJuridica.email3}" />
+						</h:column>
+
+					</h:panelGrid>
+				</p:tab>
+			</p:tabView>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

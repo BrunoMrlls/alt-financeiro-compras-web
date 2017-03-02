@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name = "TIPO_ENTIDADE", discriminatorType = DiscriminatorType.STRING)
@@ -22,6 +24,7 @@ public abstract class Entidade implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+	@NotEmpty
 	private String nome;
 	
 	@Enumerated(EnumType.STRING)
