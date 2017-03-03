@@ -1,0 +1,51 @@
+<ui:composition template="/WEB-INF/templates/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{cadastroTipoObjetoBean.editando ? 'Edição tipo objeto' : 'Novo tipo objeto'}</ui:define>
+
+	<ui:define name="content">
+		<f:metadata>
+			<o:viewParam name="tipoObjeto"
+				value="#{cadastroTipoObjetoBean.tipoObjeto}" />
+			<f:viewAction action="#{cadastroTipoObjetoBean.inicializar}" />
+		</f:metadata>
+
+		<h2>#{cadastroTipoObjetoBean.editando ? 'Edição tipo objeto' : 'Novo tipo objeto'}</h2>
+
+		<h:form id="frmCadastro">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:column>
+				<i><b> <p:outputLabel value="Código " for="codigo" /> <p:inputText
+							id="codigo" size="20" maxlength="20"
+							value="#{cadastroTipoObjetoBean.tipoObjeto.codigo}"
+							readonly="true" /></b></i>
+			</p:column>
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroTipoObjetoBean.salvar}" update="frmCadastro" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa"
+						outcome="/cadastros/parametrosGerais/objetoControle/PesquisaTiposObjetos.xhtml" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Descrição" for="descricao" />
+				<p:inputText id="descricao" size="60" maxlength="80"
+					value="#{cadastroTipoObjetoBean.tipoObjeto.descricao}" />
+				
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

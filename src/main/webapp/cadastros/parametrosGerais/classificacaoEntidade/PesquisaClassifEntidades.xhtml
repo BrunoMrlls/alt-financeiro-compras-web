@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+	<ui:define name="titulo">Pesquisa classificações de entidade</ui:define> 
+
+	<ui:define name="content">
+		<f:metadata>
+			<f:viewAction action="#{cadastroClassifEntidadeBean.inicializar}" />
+		</f:metadata>
+		
+		<h2>Pesquisa classificações de entidade</h2>
+
+		<h:form id="frmPesquisa">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome ="/cadastros/parametrosGerais/classificacaoEntidade/CadastroClassifEntidade" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:dataTable id="classifEntidadesTable"
+				value="#{pesquisaClassifEntidadeBean.classifEntidades}"
+				var="classifEntidade" style="margin-top: 20px"
+				emptyMessage="Nenhuma Classificação encontrada." rows="10"
+				paginator="true" paginatorAlwaysVisible="true"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Código"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{classifEntidade.codigo}" />
+				</p:column>
+
+				<p:column headerText="Nome" priority="2">
+					<h:outputText value="#{classifEntidade.nome}" />
+				</p:column>
+
+				<p:column style="width: 100px; text-align: center">
+					<p:button outcome="CadastroClassifEntidade" icon="ui-icon-pencil"
+						title="Editar">
+						<f:param name="classifEntidade" value="#{classifEntidade.codigo}" />
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaClassifEntidadeBean.classifEntidadeSelecionado}"
+							value="#{classifEntidade}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog id="confirmacaoExclusaoDialog"
+				widgetVar="confirmacaoExclusao"
+				message="Tem certeza que deseja excluir a classificação #{pesquisaClassifEntidadeBean.classifEntidadeSelecionado.nome}?"
+				header="Exclusão de classificação" severity="alert">
+				<p:button value="Não"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim"
+					update=":frmPesquisa:classifEntidadesTable"
+					onclick="PF('confirmacaoExclusao').hide()"
+					action="#{pesquisaClassifEntidadeBean.excluir}" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

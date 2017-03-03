@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/LayoutPadrao.xhtml">
+
+	<ui:define name="titulo">Pesquisa de Departamentos</ui:define>
+
+	<ui:define name="content">
+		<f:metadata>
+			<f:viewAction action="#{cadastroDepartamentoBean.inicializar}" />
+		</f:metadata>
+		
+		<h2>pesquisa de departamentos</h2>
+
+		<h:form id="frmPesquisa">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>					
+					<p:button value="Novo" outcome="/cadastros/parametrosGerais/departamento/CadastroDepartamento"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:dataTable id="departamentosTable"
+				value="#{pesquisaDepartamentoBean.departamentos}" var="departamento"
+				style="margin-top: 20px"
+				emptyMessage="Nenhum departamento encontrado." rows="10"
+				paginator="true" paginatorAlwaysVisible="true"
+				paginatorPosition="bottom">
+				
+				<p:column headerText="Código"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{departamento.codigo}" />
+				</p:column>
+				
+				<p:column headerText="Nome" priority="2">
+					<h:outputText value="#{departamento.nome}" />
+				</p:column>
+				
+				<p:column headerText="Sigla" priority="3">
+					<h:outputText value="#{departamento.sigla}" />
+				</p:column>
+
+				<p:column style="width: 100px; text-align: center">
+					<p:button outcome="CadastroDepartamento" icon="ui-icon-pencil"
+						title="Editar">
+						<f:param name="departamento" value="#{departamento.codigo}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaDepartamentoBean.departamentoSelecionado}"
+							value="#{departamento}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog id="confirmacaoExclusaoDialog"
+				widgetVar="confirmacaoExclusao"
+				message="Tem certeza que deseja excluir o departamento #{pesquisaDepartamentoBean.departamentoSelecionado.nome}?"
+				header="Exclusão de departamento" severity="alert">
+				<p:button value="Não"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim"
+					update=":frmPesquisa:departamentosTable"
+					oncomplete="PF('confirmacaoExclusao').hide()"
+					action="#{pesquisaDepartamentoBean.excluir}" />
+			</p:confirmDialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
