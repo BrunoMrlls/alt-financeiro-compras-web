@@ -38,26 +38,28 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+			<div class="ui-fluid">
 
-				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="60" maxlength="80"
-					value="#{cadastroObjetoControleBean.objetoControle.descricao}" />
-									
-					<p:outputLabel value="Tipo Objeto"
-						for="tipoObjeto" />					
+				<p:panelGrid layout="grid" columns="2" id="painel"
+					style="width: 100%; margin-top: 20px" 
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-1, ui-grid-col-11">
+
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText id="nome" size="60" maxlength="80"
+						value="#{cadastroObjetoControleBean.objetoControle.descricao}" />
+
+					<p:outputLabel value="Tipo Objeto" for="tipoObjeto" />
 					<p:selectOneMenu id="tipoObjeto"
 						value="#{cadastroObjetoControleBean.objetoControle.tipoObjeto}">
 						<f:selectItem itemLabel="Selecione" />
-						<f:selectItems
-							value="#{cadastroObjetoControleBean.tiposObjetos}"
+						<f:selectItems value="#{cadastroObjetoControleBean.tiposObjetos}"
 							var="tiposObjetos" itemLabel="#{tiposObjetos.descricao}"
 							itemValue="#{tiposObjetos}" />
 					</p:selectOneMenu>
-				
 
-			</p:panelGrid>
+				</p:panelGrid>
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>

@@ -38,24 +38,26 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+			<div class="ui-fluid">
 
+				<p:panelGrid layout="grid" columns="2" id="painel"
+					style="width: 100%; margin-top: 20px"
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-2, ui-grid-col-10">
 
-				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="60" maxlength="80"
-					value="#{cadastroEmpresaUsuariaBean.empresaUsuaria.nome}" />
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText id="nome" size="60" maxlength="80"
+						value="#{cadastroEmpresaUsuariaBean.empresaUsuaria.nome}" />
 
-				<p:outputLabel value="Nome Fantasia" for="nomeFantasia" />
-				<p:inputText id="nomeFantasia" size="60" maxlength="80"
-					value="#{cadastroEmpresaUsuariaBean.empresaUsuaria.nomeFantasia}" />
+					<p:outputLabel value="Nome Fantasia" for="nomeFantasia" />
+					<p:inputText id="nomeFantasia" size="60" maxlength="80"
+						value="#{cadastroEmpresaUsuariaBean.empresaUsuaria.nomeFantasia}" />
 
-				<p:outputLabel value="Filial" for="filial" />
-				<p:inputText id="filial" size="5" maxlength="10"
-					value="#{cadastroEmpresaUsuariaBean.empresaUsuaria.filial}" />
+					<p:outputLabel value="Filial" for="filial" />
+					<p:inputText id="filial" size="5" maxlength="10"
+						value="#{cadastroEmpresaUsuariaBean.empresaUsuaria.filial}" />
 
-
-				<p:outputLabel value="Entidade" for="entidade" />				
+					<p:outputLabel value="Entidade" for="entidade" />
 					<p:selectOneMenu id="entidade"
 						value="#{cadastroEmpresaUsuariaBean.empresaUsuaria.entidade}">
 						<f:selectItem itemLabel="Selecione" />
@@ -64,8 +66,8 @@
 							var="pessoasJuridicas" itemLabel="#{pessoasJuridicas.nome}"
 							itemValue="#{pessoasJuridicas}" />
 					</p:selectOneMenu>
-					
-					<p:outputLabel value="Empresa Contábil" for="empresaContabil" />				
+
+					<p:outputLabel value="Empresa Contábil" for="empresaContabil" />
 					<p:selectOneMenu id="empresaContabil"
 						value="#{cadastroEmpresaUsuariaBean.empresaUsuaria.empresaContabil}">
 						<f:selectItem itemLabel="Selecione" />
@@ -75,9 +77,8 @@
 							itemValue="#{pessoasJuridicas}" />
 					</p:selectOneMenu>
 
-
-
-			</p:panelGrid>
+				</p:panelGrid>
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>

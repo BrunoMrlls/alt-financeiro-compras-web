@@ -3,8 +3,7 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:o="http://omnifaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
 
 	<ui:define name="titulo">#{cadastroTipoObjetoBean.editando ? 'Edição tipo objeto' : 'Novo tipo objeto'}</ui:define>
 
@@ -15,7 +14,8 @@
 			<f:viewAction action="#{cadastroTipoObjetoBean.inicializar}" />
 		</f:metadata>
 
-		<h2>#{cadastroTipoObjetoBean.editando ? 'Edição tipo objeto' : 'Novo tipo objeto'}</h2>
+		<h2>#{cadastroTipoObjetoBean.editando ? 'Edição tipo objeto' :
+			'Novo tipo objeto'}</h2>
 
 		<h:form id="frmCadastro">
 			<p:messages id="messages" autoUpdate="true" closable="true" />
@@ -38,14 +38,19 @@
 				</p:toolbarGroup>
 			</p:toolbar>
 
-			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+			<div class="ui-fluid">
 
-				<p:outputLabel value="Descrição" for="descricao" />
-				<p:inputText id="descricao" size="60" maxlength="80"
-					value="#{cadastroTipoObjetoBean.tipoObjeto.descricao}" />
-				
-			</p:panelGrid>
+				<p:panelGrid layout="grid" columns="2" id="painel"
+					style="width: 100%; margin-top: 20px"
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-1, ui-grid-col-11">
+
+					<p:outputLabel value="Descrição" for="descricao" />
+					<p:inputText id="descricao" size="60" maxlength="80"
+						value="#{cadastroTipoObjetoBean.tipoObjeto.descricao}" />
+
+				</p:panelGrid>
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>
