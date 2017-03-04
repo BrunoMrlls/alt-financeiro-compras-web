@@ -1,0 +1,349 @@
+<ui:composition template="/WEB-INF/templates/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{cadastroProdutoBean.editando ? 'Edição produto' : 'Novo produto'}</ui:define>
+
+	<ui:define name="content">
+
+		<f:metadata>
+			<o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
+			<f:viewAction action="#{cadastroProdutoBean.inicializar}"></f:viewAction>
+		</f:metadata>
+
+		<h2>#{cadastroProdutoBean.editando ? 'Edição produto' : 'Novo
+			produto'}</h2>
+
+		<h:form id="frmCadastro">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroProdutoBean.salvar}" update="frmCadastro" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa"
+						outcome="/cadastros/produtos/produto/PesquisaProdutos.xhtml" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<div class="ui-fluid">
+
+				<p:panelGrid columns="4" layout="grid" id="panel_cabecalho"
+					style="width: 100%; margin-top: 20px"
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-3, ui-grid-col-3, ui-grid-col-3, ui-grid-col-3">
+
+					<h:panelGroup>
+						<i><b><p:outputLabel value="Código " for="codigo" /> <br />
+								<p:inputText id="codigo" size="20" maxlength="20"
+									value="#{cadastroProdutoBean.produto.codigo}" readonly="true" /></b></i>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<p:outputLabel value="Situação do Cadastro"
+							for="tipoSituacaoCadastro" />
+						<br />
+						<p:selectOneMenu id="tipoSituacaoCadastro"
+							value="#{cadastroProdutoBean.produto.tipoSituacaoCadastro}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems
+								value="#{cadastroProdutoBean.tipoSituacaoCadastros}"
+								var="tipoSituacaoCadastro"
+								itemLabel="#{tipoSituacaoCadastro.descricao}"
+								itemValue="#{tipoSituacaoCadastro}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+
+					<!-- inicio buscando pelo codigo -->
+					<h:panelGroup>
+						<p:outputLabel value="Fabricante" for="pessoaJuridica" />
+						<br />
+						<p:inputText id="pessoaJuridica"
+							value="#{cadastroProdutoBean.nomePessoaJuridica}"
+							readonly="#{facesContext.currentPhaseId.name eq 'RENDER_RESPONSE'}" />
+
+						<p:commandButton icon="ui-icon-search" title="Pesquisa"
+							action="#{selecaoEntidadeBean.abrirDialogo}" process="@this"
+							update="@none">
+							<p:ajax event="dialogReturn"
+								listener="#{cadastroProdutoBean.pessoaJuridicaSelecionado}"
+								process="@this" update="pessoaJuridica" />
+							<p:resetInput target="pessoaJuridica" />
+						</p:commandButton>
+					</h:panelGroup>
+
+					<!-- fim buscando pelo codigo -->
+
+				</p:panelGrid>
+
+				<p:panelGrid columns="2" layout="grid" id="panel1"
+					style="width: 100%; margin-top: 0px"
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-8, ui-grid-col-8">
+
+					<h:panelGroup>
+						<p:outputLabel value="Descricao" for="descricao" />
+						<br />
+						<p:inputText id="descricao" size="60" maxlength="80"
+							value="#{cadastroProdutoBean.produto.descricao}" />
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<p:outputLabel value="Descricao Reduzida" for="descricaoReduzida" />
+						<br />
+						<p:inputText id="descricaoReduzida" size="60" maxlength="80"
+							value="#{cadastroProdutoBean.produto.descricaoReduzida}" />
+					</h:panelGroup>
+
+				</p:panelGrid>
+
+				<p:panelGrid columns="4" layout="grid" id="panel2"
+					style="width: 100%; margin-top: 0px"
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-3, ui-grid-col-3, ui-grid-col-3, ui-grid-col-3">
+
+					<h:panelGroup>
+						<p:outputLabel value="Familia Produto" for="familiaProduto" />
+						<br />
+						<p:selectOneMenu id="familiaProduto"
+							value="#{cadastroProdutoBean.produto.familiaProduto}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastroProdutoBean.familiaProdutos}"
+								var="familiaProdutos" itemLabel="#{familiaProdutos.descricao}"
+								itemValue="#{familiaProdutos}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<p:outputLabel value="Seção Produto" for="secaoProduto" />
+						<br />
+						<p:selectOneMenu id="secaoProduto"
+							value="#{cadastroProdutoBean.produto.secaoProduto}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastroProdutoBean.secaoProdutos}"
+								var="secaoProdutos" itemLabel="#{secaoProdutos.descricao}"
+								itemValue="#{secaoProdutos}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<p:outputLabel value="Grupo Produto" for="grupoProduto" />
+						<br />
+						<p:selectOneMenu id="grupoProduto"
+							value="#{cadastroProdutoBean.produto.grupoProduto}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastroProdutoBean.grupoProdutos}"
+								var="grupoProdutos" itemLabel="#{grupoProdutos.descricao}"
+								itemValue="#{grupoProdutos}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<p:outputLabel value="Subgrupo Produto" for="subgrupoProduto" />
+						<br />
+						<p:selectOneMenu id="subgrupoProduto"
+							value="#{cadastroProdutoBean.produto.subgrupoProduto}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastroProdutoBean.subgrupoProdutos}"
+								var="subgrupoProdutos" itemLabel="#{subgrupoProdutos.descricao}"
+								itemValue="#{subgrupoProdutos}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+				</p:panelGrid>
+
+				<p:panelGrid columns="4" layout="grid" id="panel3"
+					style="width: 100%; margin-top: 0px"
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-3, ui-grid-col-3, ui-grid-col-3, ui-grid-col-3">
+
+					<h:panelGroup>
+						<p:outputLabel value="Unid. Medida" for="unidadeMedida" />
+						<br />
+						<p:selectOneMenu id="unidadeMedida"
+							value="#{cadastroProdutoBean.produto.unidadeMedida}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastroProdutoBean.unidadeMedidas}"
+								var="unidadeMedidas" itemLabel="#{unidadeMedidas.descricao}"
+								itemValue="#{unidadeMedidas}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<p:outputLabel value="Tipo de Sazonalidade" for="tipoSazonalidade" />
+						<br />
+						<p:selectOneMenu id="tipoSazonalidade"
+							value="#{cadastroProdutoBean.produto.tipoSazonalidade}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastroProdutoBean.tipoSazonalidades}"
+								var="tipoSazonalidade" itemLabel="#{tipoSazonalidade.descricao}"
+								itemValue="#{tipoSazonalidade}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<p:outputLabel value="Marca Produto" for="marca" />
+						<br />
+						<p:selectOneMenu id="marca"
+							value="#{cadastroProdutoBean.produto.marca}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastroProdutoBean.marcas}" var="marcas"
+								itemLabel="#{marcas.descricao}" itemValue="#{marcas}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<p:outputLabel value="Situação do Produto"
+							for="tipoSituacaoProduto" />
+						<br />
+						<p:selectOneMenu id="tipoSituacaoProduto"
+							value="#{cadastroProdutoBean.produto.tipoSituacaoProduto}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems
+								value="#{cadastroProdutoBean.tipoSituacaoProdutos}"
+								var="tipoSituacaoProduto"
+								itemLabel="#{tipoSituacaoProduto.descricao}"
+								itemValue="#{tipoSituacaoProduto}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+				</p:panelGrid>
+
+				<p:panelGrid columns="4" layout="grid" id="painel"
+					style="width: 100%; margin-top: 0px"
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-3, ui-grid-col-3, ui-grid-col-3, ui-grid-col-3">
+
+					<h:panelGroup>
+						<p:outputLabel value="Situação da Compra" for="tipoStatusCompra" />
+						<br />
+						<p:selectOneMenu id="tipoStatusCompra"
+							value="#{cadastroProdutoBean.produto.tipoStatusCompra}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastroProdutoBean.tipoStatusCompras}"
+								var="tipoStatusCompra" itemLabel="#{tipoStatusCompra.descricao}"
+								itemValue="#{tipoStatusCompra}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<p:outputLabel value="Tipo de Preço" for="tipoPreco" />
+						<br />
+						<p:selectOneMenu id="tipoPreco"
+							value="#{cadastroProdutoBean.produto.tipoPreco}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastroProdutoBean.tipoPrecos}"
+								var="tipoPreco" itemLabel="#{tipoPreco.descricao}"
+								itemValue="#{tipoPreco}" />
+						</p:selectOneMenu>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<p:outputLabel value="Data de Inclusão" for="dataInclusao" />
+						<br />
+						<p:calendar id="dataInclusao" size="10"
+							value="#{cadastroProdutoBean.produto.dataInclusao}"
+							pattern="dd/MM/yyyy" />
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<h:outputText value="Ncm" />
+						<br />
+						<p:inputMask mask="9999.99.99" size="13" maxlength="13"
+							value="#{cadastroProdutoBean.produto.ncm}" />
+					</h:panelGroup>
+
+				</p:panelGrid>
+
+				<!-- ean -->
+
+				<p:tabView style="width: 100%; margin-top: 5px">
+					<p:tab title="EAN">
+						<p:panelGrid layout="grid" id="gridEAN" columns="3"
+							style="width: 100%; margin-top: 1px">
+
+							<h:column>
+								<p:outputLabel value="EAN" for="ean" />
+								<br />
+								<p:inputText id="ean" size="20" maxlength="20"
+									value="#{cadastroProdutoBean.produto.ean}" />
+							</h:column>
+
+							<h:column>
+								<p:outputLabel value="Qtd. Embalagem" for="quantidadeEmbalagem" />
+								<br />
+								<p:inputText id="quantidadeEmbalagem"
+									value="#{cadastroProdutoBean.produto.quantidadeEmbalagem}" />
+							</h:column>
+
+							<h:column>
+								<p:outputLabel value="EAN Interno" for="eanInterno" />
+								<br />
+								<p:inputText id="eanInterno" size="1" maxlength="1"
+									value="#{cadastroProdutoBean.produto.eanInterno}" />
+							</h:column>
+						</p:panelGrid>
+					</p:tab>
+
+					<!-- preços de venda -->
+
+					<p:tab title="´PRODUTOS VENDA">
+						<p:panelGrid layout="grid" id="gridProdutosVenda" columns="6"
+							style="width: 100%; margin-top: 1px">
+
+							<h:column>
+								<p:outputLabel value="Preço Máximo" for="precoMaximo" />
+								<br />
+								<p:inputMask id="precoMaximo" size="12" maxlength="12" styleClass="moeda"
+									value="#{cadastroProdutoBean.produto.precoMaximo}">
+									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+								</p:inputMask>
+							</h:column>
+
+							<h:column>
+								<p:outputLabel value="Preço de Fábrica" for="precoFabrica" />
+								<br />
+								<p:inputMask id="precoFabrica" size="12" maxlength="12" styleClass="moeda"
+									value="#{cadastroProdutoBean.produto.precoFabrica}">
+									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+								</p:inputMask>
+							</h:column>
+
+							<h:column>
+								<p:outputLabel value="% Desc. Máximo" for="descontoMaximo" />
+								<br />
+								<p:inputMask id="descontoMaximo" size="8" maxlength="8"
+									value="#{cadastroProdutoBean.produto.descontoMaximo}">
+									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+								</p:inputMask>
+							</h:column>
+
+							<h:column>
+								<p:outputLabel value="% Desc. Padrão" for="descontoPadrao" />
+								<br />
+								<p:inputMask id="descontoPadrao" size="8" maxlength="8"
+									value="#{cadastroProdutoBean.produto.descontoPadrao}">
+									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+								</p:inputMask>
+							</h:column>
+
+							<h:column>
+								<p:outputLabel value="Preço de Venda" for="precoVenda" />
+								<br />
+								<p:inputMask id="precoVenda" size="12" maxlength="12" styleClass="moeda"
+									value="#{cadastroProdutoBean.produto.precoVenda}">
+									<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+								</p:inputMask>
+							</h:column>
+						</p:panelGrid>
+					</p:tab>
+				</p:tabView>
+
+			</div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
