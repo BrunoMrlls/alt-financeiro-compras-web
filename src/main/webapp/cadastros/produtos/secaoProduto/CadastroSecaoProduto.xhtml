@@ -1,0 +1,62 @@
+<ui:composition template="/WEB-INF/templates/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">#{cadastroSecaoProdutoBean.editando ? 'Edição de seção produto' : 'Nova seção de produto'}</ui:define>
+
+	<ui:define name="content">
+		<f:metadata>
+			<o:viewParam name="secaoProduto"
+				value="#{cadastroSecaoProdutoBean.secaoProduto}" />
+			<f:viewAction action="#{cadastroSecaoProdutoBean.inicializar}"></f:viewAction>
+		</f:metadata>
+
+		<h2>#{cadastroSecaoProdutoBean.editando ? 'Edição de seção
+			produto' : 'Nova seção de produto'}</h2>
+
+		<h:form id="frmCadastro">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:column>
+				<i><b><p:outputLabel value="Código" for="codigo" /> <p:inputText
+							id="codigo" size="20" maxlength="20"
+							value="#{cadastroSecaoProdutoBean.secaoProduto.codigo}"
+							readonly="true" /></b></i>
+			</p:column>
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroSecaoProdutoBean.salvar}" update="frmCadastro" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa"
+						outcome="/cadastros/produtos/secaoProduto/PesquisaSecaoProdutos.xhtml" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<div class="ui-fluid">
+
+				<p:panelGrid layout="grid" columns="2" id="painel"
+					style="width: 100%; margin-top: 20px"
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-2, ui-grid-col-10">
+
+					<p:outputLabel value="Descrição" for="descricao" />
+					<p:inputText id="descricao" size="60" maxlength="80"
+						value="#{cadastroSecaoProdutoBean.secaoProduto.descricao}" />
+
+					<p:outputLabel value="Comercializavel" for="comercializavel" />
+					<h:selectBooleanCheckbox
+						value="#{cadastroSecaoProdutoBean.secaoProduto.comercializavel}"
+						id="comercializavel" />
+					<h:message for="comercializavel" />
+
+				</p:panelGrid>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

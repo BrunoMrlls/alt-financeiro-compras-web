@@ -64,18 +64,31 @@
 
 						<p:submenu label="Produtos">
 							<p:menuitem value="Unidade de Medidas"
-								icon="ui-icon-arrowrefresh-1-w" />
+								icon="ui-icon-arrowrefresh-1-w" 
+								outcome="/cadastros/produtos/unidadeMedida/PesquisaUnidadeMedidas.xhtml"/>
+								
 							<p:menuitem value="Familia de Produto"
-								icon="ui-icon-arrowrefresh-1-w" />
+								icon="ui-icon-arrowrefresh-1-w" 
+								outcome="/cadastros/produtos/familiaProduto/PesquisaFamiliaProdutos.xhtml"/>
+								
 							<p:menuitem value="Seção de Produto"
-								icon="ui-icon-arrowrefresh-1-w" />
-							<p:menuitem value="Grupo Produto" icon="ui-icon-arrowrefresh-1-w" />
+								icon="ui-icon-arrowrefresh-1-w"
+								outcome="/cadastros/produtos/secaoProduto/CadastroSecaoProduto" />
+								
+							<p:menuitem value="Grupo Produto" icon="ui-icon-arrowrefresh-1-w"
+							outcome="/cadastros/produtos/grupoProduto/PesquisaGrupoProdutos.xhtml" />
+							
 							<p:menuitem value="Subgrupo Produto"
-								icon="ui-icon-arrowrefresh-1-w" />
+								icon="ui-icon-arrowrefresh-1-w"
+								outcome="/cadastros/produtos/subGrupoProduto/PesquisaSubgrupoProdutos.xhtml" />
+								
 							<p:menuitem value="Marca de Produto"
-								icon="ui-icon-arrowrefresh-1-w" />
+								icon="ui-icon-arrowrefresh-1-w"
+								outcome="/cadastros/produtos/marca/PesquisaMarcas.xhtml" />
+								
 							<p:separator />
 							<p:menuitem value="Produto" icon="ui-icon-arrowrefresh-1-w" />
+							
 						</p:submenu>
 					</p:submenu>
 
