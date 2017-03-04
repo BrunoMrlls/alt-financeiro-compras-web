@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"> 
+
+	<p:panelGrid id="gridFornecedor" columns="2"
+		styleClass="panelgrid-noborder"
+		style="width: 100%; margin-top: 5px margin-bottom: 10px">
+
+		<p:outputLabel value="Entidade (fornecedor)"
+			for="entidadeFornecedor" />
+		<p:selectOneMenu id="entidadeFornecedor"
+			value="#{cadastroNfCompraBean.nfCompra.entidadeFornecedor}"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{cadastroNfCompraBean.entidadesFornecedores}"
+				var="entidadesFornecedores"
+				itemLabel="#{entidadesFornecedores.nomeFantasia}"
+				itemValue="#{entidadesFornecedores}" />
+		</p:selectOneMenu>
+
+		<h:outputText value="Inscrição Federal" />
+		<p:inputMask mask="99.999.999/9999-99" size="18"
+			maxlength="18"
+			value="#{cadastroNfCompraBean.nfCompra.inscricaoFederalFornecedor}"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}" />
+
+		<p:outputLabel value="Inscrição Estadual"
+			for="inscricaoEstadualFornecedor" />
+		<p:inputText id="inscricaoEstadualFornecedor" size="20" maxlength="20"
+			value="#{cadastroNfCompraBean.nfCompra.inscricaoEstadualFornecedor}"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}" />
+
+		<p:outputLabel value="Inscrição Municipal"
+			for="inscricaoMunicipalFornecedor" />
+		<p:inputText id="inscricaoMunicipalFornecedor" size="20"
+			maxlength="20"
+			value="#{cadastroNfCompraBean.nfCompra.inscricaoMunicipalFornecedor}"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}" />
+
+		<p:outputLabel value="Tipo Logradouro" for="tipoLogradouroFornecedor" />
+		<p:selectOneMenu id="tipoLogradouroFornecedor"
+			value="#{cadastroNfCompraBean.nfCompra.tipoLogradouroFornecedor}"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{cadastroNfCompraBean.tipoLogradouros}"
+				var="tipoLogradouro" itemLabel="#{tipoLogradouro.descricao}"
+				itemValue="#{tipoLogradouro}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Logradouro" for="logradouroFornecedor" />
+		<p:inputText id="logradouroFornecedor" placeholder="endereço"
+			size="60" maxlength="60"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.logradouroFornecedor}" />
+
+		<p:outputLabel value="Numero" for="numeroFornecedor" />
+		<p:inputText id="numeroFornecedor" size="10" maxlength="10"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.numeroFornecedor}" />
+
+		<p:outputLabel value="Complemento" for="complementoFornecedor" />
+		<p:inputText id="complementoFornecedor"
+			placeholder="andar/apartamento/referência" size="60" maxlength="60"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.complementoFornecedor}" />
+
+		<p:outputLabel value="Bairro" for="bairroFornecedor" />
+		<p:inputText id="bairroFornecedor" size="40" maxlength="40"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.bairroFornecedor}" />
+
+		<h:outputText value="CEP" />
+		<p:inputMask mask="99999-999" size="9" maxlength="9"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.cepFornecedor}" />
+
+		<p:outputLabel value="Cidade" for="cidadeFornecedor" />
+		<p:inputText id="cidadeFornecedor" size="40" maxlength="40"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.cidadeFornecedor}" />
+
+		<p:outputLabel value="UF" for="ufFornecedor" />
+		<p:inputText id="ufFornecedor" size="2" maxlength="2"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.ufFornecedor}" />
+
+		<p:outputLabel value="Pais" for="paisFornecedor" />
+		<p:inputText id="paisFornecedor" size="40" maxlength="40"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.paisFornecedor}" />
+
+		<p:outputLabel value="Telefone" for="telefoneFornecedor" />
+		<p:inputText id="telefoneFornecedor" size="20" maxlength="20"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.telefoneFornecedor}" />
+
+		<p:outputLabel value="Celular" for="celularFornecedor" />
+		<p:inputText id="celularFornecedor" size="20" maxlength="20"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.celularFornecedor}" />
+
+		<p:outputLabel value="Radio" for="radioFornecedor" />
+		<p:inputText id="radioFornecedor" size="20" maxlength="20"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.radioFornecedor}" />
+
+	</p:panelGrid>
+
+</ui:composition>

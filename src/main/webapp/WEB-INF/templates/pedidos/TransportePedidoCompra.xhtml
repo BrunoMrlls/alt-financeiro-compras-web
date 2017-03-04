@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"> 
+
+	<p:panelGrid id="gridTransporte" columns="2"
+		styleClass="panelgrid-noborder"
+		style="width: 100%; margin-top: 5px margin-bottom: 10px">
+
+		<p:outputLabel value="Entidade (transportador)"
+			for="entidadeTransporte" />
+		<p:selectOneMenu id="entidadeTransporte"
+			value="#{cadastroNfCompraBean.nfCompra.entidadeTransporte}"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{cadastroNfCompraBean.entidadesTransportes}"
+				var="entidadesTransportes"
+				itemLabel="#{entidadesTransportes.nomeFantasia}"
+				itemValue="#{entidadesTransportes}" />
+		</p:selectOneMenu>
+
+		<h:outputText value="Inscrição Federal" />
+		<p:inputMask mask="99.999.999/9999-99" size="18"
+			maxlength="18"
+			value="#{cadastroNfCompraBean.nfCompra.inscricaoFederalTransporte}"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}" />
+
+		<p:outputLabel value="Inscrição Estadual"
+			for="inscricaoEstadualTransporte" />
+		<p:inputText id="inscricaoEstadualTransporte" size="20" maxlength="20"
+			value="#{cadastroNfCompraBean.nfCompra.inscricaoEstadualTransporte}"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}" />
+
+		<p:outputLabel value="Inscrição Municipal"
+			for="inscricaoMunicipalTransporte" />
+		<p:inputText id="inscricaoMunicipalTransporte" size="20"
+			maxlength="20"
+			value="#{cadastroNfCompraBean.nfCompra.inscricaoMunicipalTransporte}"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}" />
+
+		<p:outputLabel value="Tipo Logradouro" for="tipoLogradouroTransporte" />
+		<p:selectOneMenu id="tipoLogradouroTransporte"
+			value="#{cadastroNfCompraBean.nfCompra.tipoLogradouroTransporte}"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{cadastroNfCompraBean.tipoLogradouros}"
+				var="tipoLogradouro" itemLabel="#{tipoLogradouro.descricao}"
+				itemValue="#{tipoLogradouro}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Logradouro" for="logradouroTransporte" />
+		<p:inputText id="logradouroTransporte" placeholder="endereço"
+			size="60" maxlength="60"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.logradouroTransporte}" />
+
+		<p:outputLabel value="Numero" for="numeroTransporte" />
+		<p:inputText id="numeroTransporte" size="10" maxlength="10"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.numeroTransporte}" />
+
+		<p:outputLabel value="Complemento" for="complementoTransporte" />
+		<p:inputText id="complementoTransporte"
+			placeholder="andar/apartamento/referência" size="60" maxlength="60"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.complementoTransporte}" />
+
+		<p:outputLabel value="Bairro" for="bairroTransporte" />
+		<p:inputText id="bairroTransporte" size="40" maxlength="40"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.bairroTransporte}" />
+
+		<h:outputText value="CEP" />
+		<p:inputMask mask="99999-999" size="9" maxlength="9"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.cepTransporte}" />
+
+		<p:outputLabel value="Cidade" for="cidadeTransporte" />
+		<p:inputText id="cidadeTransporte" size="40" maxlength="40"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.cidadeTransporte}" />
+
+		<p:outputLabel value="UF" for="ufTransporte" />
+		<p:inputText id="ufTransporte" size="2" maxlength="2"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.ufTransporte}" />
+
+		<p:outputLabel value="Pais" for="paisTransporte" />
+		<p:inputText id="paisTransporte" size="40" maxlength="40"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.paisTransporte}" />
+
+		<p:outputLabel value="Telefone" for="telefoneTransporte" />
+		<p:inputText id="telefoneTransporte" size="20" maxlength="20"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.telefoneTransporte}" />
+
+		<p:outputLabel value="Celular" for="celularTransporte" />
+		<p:inputText id="celularTransporte" size="20" maxlength="20"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.celularTransporte}" />
+
+		<p:outputLabel value="Radio" for="radioTransporte" />
+		<p:inputText id="radioTransporte" size="20" maxlength="20"
+			disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+			value="#{cadastroNfCompraBean.nfCompra.radioTransporte}" />
+
+	</p:panelGrid>
+
+</ui:composition>

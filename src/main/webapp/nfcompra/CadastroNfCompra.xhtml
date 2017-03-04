@@ -1,0 +1,56 @@
+<ui:composition template="/WEB-INF/templates/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<f:metadata>
+		<o:viewParam name="nfCompra" value="#{cadastroNfCompraBean.nfCompra}" />
+		<f:viewAction action="#{cadastroNfCompraBean.inicializar}"></f:viewAction>
+	</f:metadata>
+
+	<ui:define name="titulo">#{cadastroNfCompraBean.editando ? 'edição nota de compra' : 'nova nota de compra'}</ui:define>
+
+	<ui:define name="content">
+		<h:form id="frmCadastro">
+			<h2>#{cadastroNfCompraBean.editando ? ':: edição nota de compra ::' :
+				':: nova nota de compra ::'}</h2>
+
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<ui:include src="/WEB-INF/templates/pedidos/BotoesPedidoCompra.xhtml" />
+
+			<ui:include src="/WEB-INF/templates/pedidos/CapaPedidoCompra.xhtml" />
+
+			<p:tabView style="margin-top: 20px">
+
+				<p:tab title="Itens Produto">
+					<ui:include src="/WEB-INF/templates/pedidos/ItensPedidoCompra.xhtml" />
+				</p:tab>
+
+				<p:tab title="Dados Entrega">
+					<ui:include
+						src="/WEB-INF/templates/pedidos/EntregaPedidoCompra.xhtml" />
+				</p:tab>
+				
+				<p:tab title="Dados Transporte">
+					<ui:include
+						src="/WEB-INF/templates/pedidos/TransportePedidoCompra.xhtml" />
+				</p:tab>
+				
+				<p:tab title="Dados Fornecedor">
+					<ui:include
+						src="/WEB-INF/templates/pedidos/FornecedorPedidoCompra.xhtml" />
+				</p:tab>
+
+				<p:tab title="Observação">
+					<ui:include
+						src="/WEB-INF/templates/pedidos/ObservacaoPedidoCompra.xhtml" />
+				</p:tab>
+
+			</p:tabView>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
