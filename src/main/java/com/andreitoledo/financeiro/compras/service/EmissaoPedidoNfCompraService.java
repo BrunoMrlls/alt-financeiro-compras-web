@@ -22,7 +22,7 @@ public class EmissaoPedidoNfCompraService implements Serializable {
 
 	@Transactional
 	public NfCompra emitir(NfCompra nfCompra) throws NegocioException {
-		nfCompra = this.cadastroNfCompraService.salvar(nfCompra);
+		nfCompra = this.cadastroNfCompraService.salvar(nfCompra);		
 
 		if (nfCompra.isNaoEmissivel()) {
 			throw new NegocioException(
@@ -37,6 +37,8 @@ public class EmissaoPedidoNfCompraService implements Serializable {
 		nfCompra.setStatus(StatusPedido.EMITIDO);
 
 		this.nfCompraDAO.salvar(nfCompra);
+		
+		/*this.nfCompraDAO.salvarTituloPagar(nfCompra);*/
 
 		return nfCompra;
 

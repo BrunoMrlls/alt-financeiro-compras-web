@@ -66,11 +66,21 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<!-- Núcleo do Hibernate -->
+		<!-- Núcleo do Hibernate - 
+		para relatorio usar 4.2.3.Final -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.2.3.Final</version>
+			<version>5.2.6.Final</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- Implementação de EntityManager da JPA - 
+		para relatorio usar 4.2.3.Final-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>			
+			<version>5.2.6.Final</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -80,15 +90,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.38</version>
 			<scope>compile</scope>
-		</dependency>
-
-		<!-- Implementação de EntityManager da JPA -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.2.3.Final</version>
-			<scope>compile</scope>
-		</dependency>
+		</dependency>		
 
 		<!-- API de Servlet -->
 		<dependency>

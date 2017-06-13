@@ -6,6 +6,30 @@
 	<persistence-unit name="financeiroPU" transaction-type="RESOURCE_LOCAL">
 	<non-jta-data-source>java:comp/env/jdbc/financeiroDB</non-jta-data-source>
 	
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.Departamento</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.EmpresaUsuaria</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.ObjetoControle</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.TipoObjeto</class> 
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.Usuario</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.entidade.ClassifEntidade</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.entidade.Endereco</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.entidade.Entidade</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.entidade.Funcionario</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.entidade.OutroCredor</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.entidade.PessoaFisica</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.entidade.PessoaJuridica</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.entidade.Vendedor</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.notaFiscal.NfCompra</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.notaFiscal.NfCompraItemProduto</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.FamiliaProduto</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.GrupoProduto</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.Marca</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.Produto</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.SecaoProduto</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.SubgrupoProduto</class>
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.UnidadeMedida</class>
+		
+	
 		<properties>			
 			<!-- validate | update | create | create-drop -->
 			<property name="hibernate.hbm2ddl.auto" value="update"/>

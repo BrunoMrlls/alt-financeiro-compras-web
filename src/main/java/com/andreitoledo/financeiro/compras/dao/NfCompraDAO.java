@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceException;
+import javax.persistence.StoredProcedureQuery;
 
 import com.andreitoledo.financeiro.compras.model.cadastros.notaFiscal.NfCompra;
 import com.andreitoledo.financeiro.compras.service.NegocioException;
@@ -30,6 +32,7 @@ public class NfCompraDAO implements Serializable {
 
 	public void salvar(NfCompra nfCompra) {
 		manager.merge(nfCompra);
+		
 	}
 
 	@Transactional
@@ -46,6 +49,22 @@ public class NfCompraDAO implements Serializable {
 
 		}
 
-	}
+	}	 
+	
+/*	public void salvarTituloPagar(NfCompra nfCompra) {		
+			
+			StoredProcedureQuery storedProcedure = manager.createStoredProcedureQuery("spInserirTitulosPagar");
+			//storedProcedure.registerStoredProcedureParameter("codigoPedido", Long.class, ParameterMode.IN);
+			//storedProcedure.setParameter("codigoPedido", 1L);
+			
+			storedProcedure.registerStoredProcedureParameter("codigoPedido", Long.class, ParameterMode.IN);			
+			
+			storedProcedure.setParameter("codigoPedido", nfCompra);						
+			
+			storedProcedure.execute();
+
+	}	*/
+	
+	
 
 }
