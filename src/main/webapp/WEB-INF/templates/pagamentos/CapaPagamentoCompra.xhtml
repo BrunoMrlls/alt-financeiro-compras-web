@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="ui-fluid">
+
+		<p:panelGrid columns="4" layout="grid" id="panel_codigo"
+			style="width: 100%; margin-top: 20px" styleClass="panelgrid-noborder"
+			columnClasses="rotulo, campo">
+
+			<p:outputLabel value="Nota de Compra"
+				style="font-weight: bold; font-size: 1.1em"
+				rendered="#{cadastroNfCompraBean.nfCompra.existente}" for="codigo" />
+			<h:outputText id="codigo" style="font-weight: bold; font-size: 1.1em"
+				value="#{cadastroNfCompraBean.nfCompra.codigo}"
+				rendered="#{cadastroNfCompraBean.nfCompra.existente}" />
+
+			<p:outputLabel value="Data de Criação"
+				rendered="#{cadastroNfCompraBean.nfCompra.existente}" />
+			<h:outputText value="#{cadastroNfCompraBean.nfCompra.dataCriacao}"
+				rendered="#{cadastroNfCompraBean.nfCompra.existente}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+
+			<p:outputLabel value="Data de Emissão"
+				rendered="#{cadastroNfCompraBean.nfCompra.emitida}" />
+			<h:outputText value="#{cadastroNfCompraBean.nfCompra.dataEmissao}"
+				rendered="#{cadastroNfCompraBean.nfCompra.emitida}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+
+			<p:outputLabel value="Data de Cancelamento"
+				rendered="#{cadastroNfCompraBean.nfCompra.cancelada}" />
+			<h:outputText
+				value="#{cadastroNfCompraBean.nfCompra.dataCancelamento}"
+				rendered="#{cadastroNfCompraBean.nfCompra.cancelada}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+
+			<p:outputLabel value="Status Nota Fiscal"
+				style="font-weight: bold; font-size: 1.1em" />
+			<h:outputText
+				value="#{cadastroNfCompraBean.nfCompra.status.descricao}"
+				style="font-weight: bold; color: blue; font-size: 1.1em" />
+
+			<p:outputLabel value="Data do Pagamento"
+				rendered="#{cadastroNfCompraBean.nfCompra.paga}" />
+			<h:outputText value="#{cadastroNfCompraBean.nfCompra.dataPagamento}"
+				rendered="#{cadastroNfCompraBean.nfCompra.paga}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+
+			<p:outputLabel value="Status Pagamento"
+				style="font-weight: bold; font-size: 1.1em" />
+			<h:outputText
+				value="#{cadastroNfCompraBean.nfCompra.statusPgto.descricao}"
+				style="font-weight: bold; color: red; font-size: 1.1em" />
+
+		</p:panelGrid>
+
+		<p:panelGrid columns="4" layout="grid" id="panel_cabecalho"
+			style="width: 100%; margin-top: 5px" styleClass="panelgrid-noborder"
+			columnClasses="ui-grid-col-3, ui-grid-col-3, ui-grid-col-3, ui-grid-col-3">
+
+			<p:outputLabel value="Usuário" for="usuario" />
+			<p:selectOneMenu id="usuario"
+				value="#{cadastroNfCompraBean.nfCompra.usuario}"
+				disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}">
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItems value="#{cadastroNfCompraBean.usuarios}"
+					var="usuarios" itemLabel="#{usuarios.nome}" itemValue="#{usuarios}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Empresa Usuária" for="empresaUsuaria" />
+			<p:selectOneMenu id="empresaUsuaria"
+				value="#{cadastroNfCompraBean.nfCompra.empresaUsuaria}"
+				disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}">
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItems value="#{cadastroNfCompraBean.empresas}"
+					var="empresas" itemLabel="#{empresas.nomeFantasia}"
+					itemValue="#{empresas}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Entidade" for="entidade" />
+			<p:selectOneMenu id="entidade"
+				value="#{cadastroNfCompraBean.nfCompra.entidade}"
+				disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}">
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItems value="#{cadastroNfCompraBean.entidades}"
+					var="entidades" itemLabel="#{entidades.nomeFantasia}"
+					itemValue="#{entidades}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="NF - Espécie" for="tipoNfEspecie" />
+			<p:selectOneMenu id="tipoNfEspecie"
+				value="#{cadastroNfCompraBean.nfCompra.tipoNfEspecie}"
+				disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}">
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItems value="#{cadastroNfCompraBean.tipoNfEspecies}"
+					var="tipoNfEspecie" itemLabel="#{tipoNfEspecie.descricao}"
+					itemValue="#{tipoNfEspecie}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="NF - Numero" for="nfNumero" />
+			<p:inputText id="nfNumero" size="20" maxlength="20"
+				disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}"
+				value="#{cadastroNfCompraBean.nfCompra.nfNumero}" />
+
+			<p:outputLabel value="Data de Movimento" for="dataMovimento" />
+			<p:calendar id="dataMovimento" size="10"
+				value="#{cadastroNfCompraBean.nfCompra.dataMovimento}"
+				pattern="dd/MM/yyyy"
+				disabled="#{cadastroNfCompraBean.nfCompra.naoAlteravel}" />
+
+			<p:outputLabel value="Valor Total"
+				style="font-weight: bold; font-size: 1.1em" />
+			<h:outputText value="#{cadastroNfCompraBean.nfCompra.valorTotal}"
+				style="font-weight: bold; color: red; font-size: 1.1em">
+				<f:convertNumber type="currency" />
+			</h:outputText>
+
+		</p:panelGrid>
+	</div>
+</ui:composition>

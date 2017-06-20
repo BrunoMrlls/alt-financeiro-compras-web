@@ -10,6 +10,7 @@ import com.andreitoledo.financeiro.compras.dao.NfCompraDAO;
 import com.andreitoledo.financeiro.compras.model.cadastros.notaFiscal.NfCompra;
 import com.andreitoledo.financeiro.compras.model.cadastros.notaFiscal.NfCompraItemProduto;
 import com.andreitoledo.financeiro.compras.model.cadastros.notaFiscal.StatusPedido;
+import com.andreitoledo.financeiro.compras.model.cadastros.pagamento.StatusPagamento;
 import com.andreitoledo.financeiro.compras.util.jpa.Transactional;
 
 public class CadastroNfCompraService implements Serializable {
@@ -24,6 +25,7 @@ public class CadastroNfCompraService implements Serializable {
 		if (nfCompra.isNovo()) {
 			nfCompra.setDataCriacao(new Date());
 			nfCompra.setStatus(StatusPedido.ORCAMENTO);
+			nfCompra.setStatusPgto(StatusPagamento.PENDENTE);
 
 		}
 

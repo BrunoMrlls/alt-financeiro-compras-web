@@ -29,6 +29,7 @@ import javax.validation.constraints.NotNull;
 import com.andreitoledo.financeiro.compras.model.cadastros.EmpresaUsuaria;
 import com.andreitoledo.financeiro.compras.model.cadastros.Usuario;
 import com.andreitoledo.financeiro.compras.model.cadastros.entidade.PessoaJuridica;
+import com.andreitoledo.financeiro.compras.model.cadastros.pagamento.StatusPagamento;
 import com.andreitoledo.financeiro.compras.model.cadastros.produto.Produto;
 
 @Entity
@@ -36,9 +37,9 @@ import com.andreitoledo.financeiro.compras.model.cadastros.produto.Produto;
 		+ " left join fetch nfc.usuario "
 		+ " left join fetch nfc.empresaUsuaria "
 		+ " left join fetch nfc.entidade "
-		+ " left join fetch nfc.entidadeEntrega"
-		+ " left join fetch nfc.entidadeTransporte"
-		+ " left join fetch nfc.entidadeFornecedor") })
+		+ " left join fetch nfc.entidadeEntrega "
+		+ " left join fetch nfc.entidadeTransporte "
+		+ " left join fetch nfc.entidadeFornecedor ") })
 @Table(name = "nf_compra")
 public class NfCompra implements Serializable {
 
@@ -88,6 +89,16 @@ public class NfCompra implements Serializable {
 	private StatusPedido status = StatusPedido.ORCAMENTO;
 	@Column(columnDefinition = "text")
 	private String observacao;
+	
+	/*inicio atributos pagamento*/
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_pagamento")
+	private Date dataPagamento;
+	
+	@Enumerated(EnumType.STRING)
+	private StatusPagamento statusPgto = StatusPagamento.PENDENTE;
+	/*fim atributos pagamento*/
+	
 	/* inicio endereco entrega */
 	@ManyToOne
 	@JoinColumn(name = "codigo_entidade_entrega")
@@ -639,6 +650,22 @@ public class NfCompra implements Serializable {
 
 	public void setRadioFornecedor(String radioFornecedor) {
 		this.radioFornecedor = radioFornecedor;
+	}	
+
+	public Date getDataPagamento() {
+		return dataPagamento;
+	}
+
+	public void setDataPagamento(Date dataPagamento) {
+		this.dataPagamento = dataPagamento;
+	}
+
+	public StatusPagamento getStatusPgto() {
+		return statusPgto;
+	}
+
+	public void setStatusPgto(StatusPagamento statusPgto) {
+		this.statusPgto = statusPgto;
 	}
 
 	@Transient
@@ -720,6 +747,30 @@ public class NfCompra implements Serializable {
 	public boolean isNaoEmissivel() {
 		return !this.isEmissivel();
 	}
+	
+	/* inicio transientes pagamento*/
+	
+	@Transient
+	public boolean isPendente() {
+		return StatusPagamento.PENDENTE.equals(this.getStatusPgto());
+	}
+	
+	@Transient
+	public boolean isNaoPagavel() {
+		return !this.isPagavel();
+	}
+	
+	@Transient
+	public boolean isPagavel() {
+		return this.isExistente() && this.isPendente();
+	}
+	
+	@Transient
+	public boolean isPaga() {
+		return !this.isPendente();
+	}
+	
+	/* fim transientes pagamento*/
 
 	@Transient
 	public boolean isEmissivel() {

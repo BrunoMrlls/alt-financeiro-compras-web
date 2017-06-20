@@ -39,12 +39,12 @@
 								icon="ui-icon-arrowrefresh-1-w"
 								outcome="/cadastros/parametrosGerais/objetoControle/PesquisaTiposObjetos.xhtml" />
 
-							<p:menuitem value="Bancos" icon="ui-icon-arrowrefresh-1-w" 
-							outcome="/cadastros/parametrosGerais/banco/PesquisaBancos.xhtml" />
+							<p:menuitem value="Bancos" icon="ui-icon-arrowrefresh-1-w"
+								outcome="/cadastros/parametrosGerais/banco/PesquisaBancos.xhtml" />
 
 							<p:menuitem value="Conta Bancária"
-								icon="ui-icon-arrowrefresh-1-w" 
-								outcome="/cadastros/parametrosGerais/contaBancaria/PesquisaContasBancarias.xhtml"/>
+								icon="ui-icon-arrowrefresh-1-w"
+								outcome="/cadastros/parametrosGerais/contaBancaria/PesquisaContasBancarias.xhtml" />
 
 						</p:submenu>
 						<p:separator />
@@ -111,18 +111,11 @@
 					</p:submenu>
 
 					<p:submenu label="Financeiro">
-						<p:submenu label="Pagamentos">
+						<p:menuitem value="Pagamento Nota de Compra"
+							icon="ui-icon-arrowrefresh-1-w"
+							outcome="/financeiro/pagamentoCompra/PesquisaPgCompras.xhtml" />
 
-							<p:menuitem value="Pagamento Banco"
-								icon="ui-icon-arrowrefresh-1-w" />
-							<p:menuitem value="Pagamento Caixa/Dinheiro"
-								icon="ui-icon-arrowrefresh-1-w" />
-							<p:menuitem value="Pagamento Cheque"
-								icon="ui-icon-arrowrefresh-1-w" />
-
-						</p:submenu>
-					</p:submenu>
-
+					</p:submenu>					
 
 				</p:panelMenu>
 

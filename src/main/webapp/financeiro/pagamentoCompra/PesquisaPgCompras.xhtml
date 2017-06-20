@@ -1,0 +1,121 @@
+<ui:composition template="/WEB-INF/templates/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pagamento Compra</ui:define>
+
+	<ui:define name="content">
+		<h:form id="frmPesquisa">
+			<h2>
+				Pagamentos: <SMALL>manutenção de pagamentos notas de compra</SMALL>
+			</h2>
+
+			<p:messages id="messages" autoUpdate="true" closable="true" />			
+
+			<p:dataTable id="nfComprasTable"
+				value="#{pesquisaNfCompraBean.nfCompras}" var="nfCompra"
+				style="margin-top: 20px"
+				emptyMessage="Nenhuma Nota de Compra encontrado." rows="10"
+				paginator="true" paginatorAlwaysVisible="true"
+				paginatorPosition="bottom">
+
+				<p:column headerText="Código" filterBy="#{nfCompra.codigo}"
+					sortBy="#{nfCompra.codigo}"
+					style="text-align: center; width: 100px">
+					<h:outputText value="#{nfCompra.codigo}" />
+				</p:column>
+
+				<p:column headerText="NF Número" filterBy="#{nfCompra.nfNumero}"
+					sortBy="#{nfCompra.nfNumero}" priority="2">
+					<h:outputText value="#{nfCompra.nfNumero}" />
+				</p:column>
+
+				<p:column headerText="Data de Criação"
+					filterBy="#{nfCompra.dataCriacao}" sortBy="#{nfCompra.dataCriacao}"
+					priority="3">
+					<h:outputText value="#{nfCompra.dataCriacao}" />
+				</p:column>
+
+				<p:column headerText="Status da NF"
+					filterBy="#{nfCompra.status.descricao}" priority="5">
+					<h:outputText value="#{nfCompra.status.descricao}" />
+				</p:column>
+				
+				<p:column headerText="Data de Emissão"
+					filterBy="#{nfCompra.dataEmissao}" sortBy="#{nfCompra.dataEmissao}"
+					priority="6">
+					<h:outputText value="#{nfCompra.dataEmissao}" />
+				</p:column>
+				
+				<p:column headerText="Status Pagto"
+					filterBy="#{nfCompra.statusPgto.descricao}" priority="4">
+					<h:outputText value="#{nfCompra.statusPgto.descricao}" />
+				</p:column>
+				
+				<p:column headerText="Data de Pagamento"
+					filterBy="#{nfCompra.dataPagamento}" sortBy="#{nfCompra.dataPagamento}"
+					priority="7">
+					<h:outputText value="#{nfCompra.dataPagamento}" />
+				</p:column>				
+
+				<p:column headerText="Empresa Usuária"
+					filterBy="#{nfCompra.empresaUsuaria.nomeFantasia}"
+					sortBy="#{nfCompra.empresaUsuaria.nomeFantasia}" priority="8">
+					<h:outputText value="#{nfCompra.empresaUsuaria.nomeFantasia}" />
+				</p:column>
+								
+
+				<!-- botões de ação -->
+
+				<p:column width="15%" style="text-align: center" headerText="ações">
+					<p:button outcome="PagamentoNfCompra" icon="ui-icon-calculator"
+						title="Pagar">
+						<f:param name="nfCompra" value="#{nfCompra.codigo}" />
+					</p:button>
+				</p:column>					
+					
+					
+					<!-- <p:spacer width="10" />
+
+					<p:column style="width: 100px; text-align: center">
+						<p:button outcome="CadastroPgCompra" icon="ui-icon-pencil"
+							title="Editar">
+							<f:param name="nfCompra" value="#{nfCompra.codigo}" />
+						</p:button>
+					</p:column>
+					
+					<p:spacer width="10" />
+
+					bloco exclusão
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaNfCompraBean.nfCompraSelecionado}"
+							value="#{nfCompra}" />
+					</p:commandButton>
+
+				</p:column>
+ -->
+			</p:dataTable>
+
+			<!-- confirmação exclusão -->
+
+			<p:confirmDialog id="confirmacaoExclusaoDialog"
+				widgetVar="confirmacaoExclusao"
+				message="Tem certeza que deseja excluir a Nota de Compra #{pesquisaNfCompraBean.nfCompraSelecionado.codigo}?"
+				header="Exclusão de Nota de Compra" severity="alert">
+				<p:button value="Não"
+					onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim" update=":frmPesquisa:nfComprasTable"
+					onclick="PF('confirmacaoExclusao').hide()"
+					action="#{pesquisaNfCompraBean.excluir}" />
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
