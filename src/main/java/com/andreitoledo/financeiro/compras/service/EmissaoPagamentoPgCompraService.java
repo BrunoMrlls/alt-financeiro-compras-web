@@ -38,8 +38,6 @@ public class EmissaoPagamentoPgCompraService implements Serializable {
 		nfCompra.setStatusPgto(StatusPagamento.PAGO);
 
 		this.nfCompraDAO.salvar(nfCompra);
-		
-		/*this.nfCompraDAO.salvarTituloPagar(nfCompra);*/
 
 		return nfCompra;
 

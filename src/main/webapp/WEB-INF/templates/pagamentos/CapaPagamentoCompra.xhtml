@@ -51,6 +51,14 @@
 				rendered="#{cadastroNfCompraBean.nfCompra.paga}">
 				<f:convertDateTime pattern="dd/MM/yyyy" />
 			</h:outputText>
+			
+			<p:outputLabel value="Data do Cancelamento"
+				rendered="#{cadastroNfCompraBean.nfCompra.canceladaPagamento}" />
+			<h:outputText
+				value="#{cadastroNfCompraBean.nfCompra.dataCancelamentoPagamento}"
+				rendered="#{cadastroNfCompraBean.nfCompra.canceladaPagamento}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
 
 			<p:outputLabel value="Status Pagamento"
 				style="font-weight: bold; font-size: 1.1em" />

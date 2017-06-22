@@ -18,9 +18,9 @@
 				disabled="#{cadastroNfCompraBean.nfCompra.naoPagavel}" />
 
 			<p:commandButton value="Cancelar"
-				action="#{cancelamentoNfCompraBean.cancelarPedido}" process="@this"
+				action="#{cancelamentoPgCompraBean.cancelarPedido}" process="@this"
 				update="@form"
-				disabled="#{cadastroNfCompraBean.nfCompra.naoCancelavel}" />
+				disabled="#{cadastroPgCompraBean.nfCompra.naoCancelavelPagamento}" />
 
 			<p:separator />
 

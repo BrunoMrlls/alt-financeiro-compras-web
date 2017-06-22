@@ -22,46 +22,40 @@
 				paginator="true" paginatorAlwaysVisible="true"
 				paginatorPosition="bottom">
 
-				<p:column headerText="Código" filterBy="#{nfCompra.codigo}"
+				<p:column headerText="nota de compra" filterBy="#{nfCompra.codigo}"
 					sortBy="#{nfCompra.codigo}"
 					style="text-align: center; width: 100px">
 					<h:outputText value="#{nfCompra.codigo}" />
 				</p:column>
 
-				<p:column headerText="NF Número" filterBy="#{nfCompra.nfNumero}"
+				<p:column headerText="nota fiscal" filterBy="#{nfCompra.nfNumero}"
 					sortBy="#{nfCompra.nfNumero}" priority="2">
 					<h:outputText value="#{nfCompra.nfNumero}" />
 				</p:column>
 
-				<p:column headerText="Data de Criação"
+				<p:column headerText="data de criação"
 					filterBy="#{nfCompra.dataCriacao}" sortBy="#{nfCompra.dataCriacao}"
 					priority="3">
 					<h:outputText value="#{nfCompra.dataCriacao}" />
 				</p:column>
-
-				<p:column headerText="Status da NF"
-					filterBy="#{nfCompra.status.descricao}" priority="5">
-					<h:outputText value="#{nfCompra.status.descricao}" />
-				</p:column>
-
-				<p:column headerText="Data de Emissão"
+				
+				<p:column headerText="data de emissão"
 					filterBy="#{nfCompra.dataEmissao}" sortBy="#{nfCompra.dataEmissao}"
 					priority="6">
 					<h:outputText value="#{nfCompra.dataEmissao}" />
 				</p:column>
 
-				<p:column headerText="Status Pagto"
+				<p:column headerText="status nota de compra"
+					filterBy="#{nfCompra.status.descricao}" priority="5">
+					<h:outputText value="#{nfCompra.status.descricao}" />
+				</p:column>
+
+				<p:column headerText="status pagamento"
 					filterBy="#{nfCompra.statusPgto.descricao}" priority="4">
 					<h:outputText value="#{nfCompra.statusPgto.descricao}" />
 				</p:column>
 
-				<p:column headerText="Data de Pagamento"
-					filterBy="#{nfCompra.dataPagamento}"
-					sortBy="#{nfCompra.dataPagamento}" priority="7">
-					<h:outputText value="#{nfCompra.dataPagamento}" />
-				</p:column>
-
-				<p:column headerText="Empresa Usuária"
+				<p:column headerText="empresa usuária"
 					filterBy="#{nfCompra.empresaUsuaria.nomeFantasia}"
 					sortBy="#{nfCompra.empresaUsuaria.nomeFantasia}" priority="8">
 					<h:outputText value="#{nfCompra.empresaUsuaria.nomeFantasia}" />
@@ -70,8 +64,8 @@
 				<!-- botões de ação -->
 				
 				<p:column width="15%" style="text-align: center" headerText="ações">
-					<p:button outcome="PagamentoNfCompra" icon="ui-icon-calculator"
-						title="Pagar">
+					<p:button outcome="PagamentoNfCompra" icon="ui-icon-pencil"
+						title="Editar">
 						<f:param name="nfCompra" value="#{nfCompra.codigo}" />
 					</p:button>
 				</p:column>

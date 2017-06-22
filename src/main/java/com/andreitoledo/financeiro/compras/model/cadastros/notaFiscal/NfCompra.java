@@ -33,16 +33,13 @@ import com.andreitoledo.financeiro.compras.model.cadastros.pagamento.StatusPagam
 import com.andreitoledo.financeiro.compras.model.cadastros.produto.Produto;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "NfCompra.buscarTodos", query = " select nfc from NfCompra nfc "
-		+ " left join fetch nfc.usuario "
-		+ " left join fetch nfc.empresaUsuaria "
-		+ " left join fetch nfc.entidade "
-		+ " left join fetch nfc.entidadeEntrega "
-		+ " left join fetch nfc.entidadeTransporte "
-		+ " left join fetch nfc.entidadeFornecedor "),	
-	@NamedQuery(name = "NfCompra.buscarPorStatusEmitido", query = " select nfc from NfCompra nfc "
-			+ "WHERE nfc.status = com.andreitoledo.financeiro.compras.model.cadastros.notaFiscal.StatusPedido.EMITIDO "),
-})
+@NamedQueries({
+		@NamedQuery(name = "NfCompra.buscarTodos", query = " select nfc from NfCompra nfc "
+				+ " left join fetch nfc.usuario " + " left join fetch nfc.empresaUsuaria "
+				+ " left join fetch nfc.entidade " + " left join fetch nfc.entidadeEntrega "
+				+ " left join fetch nfc.entidadeTransporte " + " left join fetch nfc.entidadeFornecedor "),
+		@NamedQuery(name = "NfCompra.buscarPorStatusEmitido", query = " select nfc from NfCompra nfc "
+				+ "WHERE nfc.status = com.andreitoledo.financeiro.compras.model.cadastros.notaFiscal.StatusPedido.EMITIDO "), })
 
 @Table(name = "nf_compra")
 public class NfCompra implements Serializable {
@@ -93,16 +90,20 @@ public class NfCompra implements Serializable {
 	private StatusPedido status = StatusPedido.ORCAMENTO;
 	@Column(columnDefinition = "text")
 	private String observacao;
-	
-	/*inicio atributos pagamento*/
+
+	/* inicio atributos pagamento */
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_pagamento")
 	private Date dataPagamento;
-	
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_cancelamento_pagamento")
+	private Date dataCancelamentoPagamento;
+
 	@Enumerated(EnumType.STRING)
 	private StatusPagamento statusPgto = StatusPagamento.PENDENTE;
-	/*fim atributos pagamento*/
-	
+	/* fim atributos pagamento */
+
 	/* inicio endereco entrega */
 	@ManyToOne
 	@JoinColumn(name = "codigo_entidade_entrega")
@@ -289,8 +290,7 @@ public class NfCompra implements Serializable {
 		return nfCompraItensProduto;
 	}
 
-	public void setNfCompraItensProduto(
-			List<NfCompraItemProduto> nfCompraItensProduto) {
+	public void setNfCompraItensProduto(List<NfCompraItemProduto> nfCompraItensProduto) {
 		this.nfCompraItensProduto = nfCompraItensProduto;
 	}
 
@@ -410,8 +410,7 @@ public class NfCompra implements Serializable {
 		return inscricaoEstadualTransporte;
 	}
 
-	public void setInscricaoEstadualTransporte(
-			String inscricaoEstadualTransporte) {
+	public void setInscricaoEstadualTransporte(String inscricaoEstadualTransporte) {
 		this.inscricaoEstadualTransporte = inscricaoEstadualTransporte;
 	}
 
@@ -419,8 +418,7 @@ public class NfCompra implements Serializable {
 		return inscricaoMunicipalTransporte;
 	}
 
-	public void setInscricaoMunicipalTransporte(
-			String inscricaoMunicipalTransporte) {
+	public void setInscricaoMunicipalTransporte(String inscricaoMunicipalTransporte) {
 		this.inscricaoMunicipalTransporte = inscricaoMunicipalTransporte;
 	}
 
@@ -428,14 +426,12 @@ public class NfCompra implements Serializable {
 		return tipoLogradouroTransporte;
 	}
 
-	public void setTipoLogradouroTransporte(
-			TipoLogradouro tipoLogradouroTransporte) {
+	public void setTipoLogradouroTransporte(TipoLogradouro tipoLogradouroTransporte) {
 		this.tipoLogradouroTransporte = tipoLogradouroTransporte;
 	}
 
 	public String getLogradouroTransporte() {
-		return logradouroTransporte == null ? null : logradouroTransporte
-				.toUpperCase();
+		return logradouroTransporte == null ? null : logradouroTransporte.toUpperCase();
 	}
 
 	public void setLogradouroTransporte(String logradouroTransporte) {
@@ -451,8 +447,7 @@ public class NfCompra implements Serializable {
 	}
 
 	public String getComplementoTransporte() {
-		return complementoTransporte == null ? null : complementoTransporte
-				.toUpperCase();
+		return complementoTransporte == null ? null : complementoTransporte.toUpperCase();
 	}
 
 	public void setComplementoTransporte(String complementoTransporte) {
@@ -543,8 +538,7 @@ public class NfCompra implements Serializable {
 		return inscricaoEstadualFornecedor;
 	}
 
-	public void setInscricaoEstadualFornecedor(
-			String inscricaoEstadualFornecedor) {
+	public void setInscricaoEstadualFornecedor(String inscricaoEstadualFornecedor) {
 		this.inscricaoEstadualFornecedor = inscricaoEstadualFornecedor;
 	}
 
@@ -552,8 +546,7 @@ public class NfCompra implements Serializable {
 		return inscricaoMunicipalFornecedor;
 	}
 
-	public void setInscricaoMunicipalFornecedor(
-			String inscricaoMunicipalFornecedor) {
+	public void setInscricaoMunicipalFornecedor(String inscricaoMunicipalFornecedor) {
 		this.inscricaoMunicipalFornecedor = inscricaoMunicipalFornecedor;
 	}
 
@@ -561,14 +554,12 @@ public class NfCompra implements Serializable {
 		return tipoLogradouroFornecedor;
 	}
 
-	public void setTipoLogradouroFornecedor(
-			TipoLogradouro tipoLogradouroFornecedor) {
+	public void setTipoLogradouroFornecedor(TipoLogradouro tipoLogradouroFornecedor) {
 		this.tipoLogradouroFornecedor = tipoLogradouroFornecedor;
 	}
 
 	public String getLogradouroFornecedor() {
-		return logradouroFornecedor == null ? null : logradouroFornecedor
-				.toUpperCase();
+		return logradouroFornecedor == null ? null : logradouroFornecedor.toUpperCase();
 	}
 
 	public void setLogradouroFornecedor(String logradouroFornecedor) {
@@ -584,8 +575,7 @@ public class NfCompra implements Serializable {
 	}
 
 	public String getComplementoFornecedor() {
-		return complementoFornecedor == null ? null : complementoFornecedor
-				.toUpperCase();
+		return complementoFornecedor == null ? null : complementoFornecedor.toUpperCase();
 	}
 
 	public void setComplementoFornecedor(String complementoFornecedor) {
@@ -654,7 +644,7 @@ public class NfCompra implements Serializable {
 
 	public void setRadioFornecedor(String radioFornecedor) {
 		this.radioFornecedor = radioFornecedor;
-	}	
+	}
 
 	public Date getDataPagamento() {
 		return dataPagamento;
@@ -662,6 +652,14 @@ public class NfCompra implements Serializable {
 
 	public void setDataPagamento(Date dataPagamento) {
 		this.dataPagamento = dataPagamento;
+	}
+
+	public Date getDataCancelamentoPagamento() {
+		return dataCancelamentoPagamento;
+	}
+
+	public void setDataCancelamentoPagamento(Date dataCancelamentoPagamento) {
+		this.dataCancelamentoPagamento = dataCancelamentoPagamento;
 	}
 
 	public StatusPagamento getStatusPgto() {
@@ -727,11 +725,9 @@ public class NfCompra implements Serializable {
 	}
 
 	public void removerItemVazio() {
-		NfCompraItemProduto primeiroItem = this.getNfCompraItensProduto()
-				.get(0);
+		NfCompraItemProduto primeiroItem = this.getNfCompraItensProduto().get(0);
 
-		if (primeiroItem != null
-				&& primeiroItem.getProduto().getCodigo() == null) {
+		if (primeiroItem != null && primeiroItem.getProduto().getCodigo() == null) {
 			this.getNfCompraItensProduto().remove(0);
 
 		}
@@ -751,30 +747,6 @@ public class NfCompra implements Serializable {
 	public boolean isNaoEmissivel() {
 		return !this.isEmissivel();
 	}
-	
-	/* inicio transientes pagamento*/
-	
-	@Transient
-	public boolean isPendente() {
-		return StatusPagamento.PENDENTE.equals(this.getStatusPgto());
-	}
-	
-	@Transient
-	public boolean isNaoPagavel() {
-		return !this.isPagavel();
-	}
-	
-	@Transient
-	public boolean isPagavel() {
-		return this.isExistente() && this.isPendente();
-	}
-	
-	@Transient
-	public boolean isPaga() {
-		return !this.isPendente();
-	}
-	
-	/* fim transientes pagamento*/
 
 	@Transient
 	public boolean isEmissivel() {
@@ -815,5 +787,70 @@ public class NfCompra implements Serializable {
 	public boolean isNaoAlteravel() {
 		return !this.isAlteravel();
 	}
+
+	/* inicio transientes pagamento */
+
+	@Transient
+	public boolean isPendente() {
+		return StatusPagamento.PENDENTE.equals(this.getStatusPgto());
+	}
+
+	@Transient
+	public boolean isNaoPagavel() {
+		return !this.isPagavel();
+	}
+
+	@Transient
+	public boolean isPagavel() {
+		return this.isExistente() && this.isPendente();
+	}
+
+	@Transient
+	public boolean isPaga() {
+		return !this.isPendente();
+	}
+
+	/* fim transientes pagamento */
+
+	/* inicio transientes cancelamento do pagamento */
+
+	@Transient
+	public boolean isCancelavelPagamento() {
+		return this.isExistente() && !this.isCanceladoPagamento();
+	}
+
+	@Transient
+	private boolean isCanceladoPagamento() {
+		return StatusPagamento.CANCELADO.equals(this.getStatusPgto());
+	}
+
+	@Transient
+	public boolean isNaoCancelavelPagamento() {
+		return !this.isCancelavelPagamento();
+	}
+	
+	@Transient
+	public boolean isCanceladaPagamento() {
+		return this.isCanceladoPagamento();
+	}
+	
+	/*transientes cancelamento pendente*/
+	
+	@Transient
+	public boolean isCancelavelPagamentoPendente() {
+		return this.isExistente() && !this.isCanceladoPagamentoPendente();
+	}
+
+	@Transient
+	private boolean isCanceladoPagamentoPendente() {
+		return StatusPagamento.PENDENTE.equals(this.getStatusPgto());
+	}
+
+	@Transient
+	public boolean isNaoCancelavelPagamentoPendente() {
+		return !this.isCancelavelPagamentoPendente();
+	}
+
+	/* fim transientes cancelamento do pagamento */
 
 }
