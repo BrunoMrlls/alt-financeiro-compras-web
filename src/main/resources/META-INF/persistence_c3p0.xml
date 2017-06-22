@@ -3,7 +3,8 @@
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	
-	<persistence-unit name="financeiroPU" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="financeiroPU" transaction-type="RESOURCE_LOCAL">	
+	<non-jta-data-source>java:comp/env/jdbc/financeiroDB</non-jta-data-source>
 	
 	<class>com.andreitoledo.financeiro.compras.model.cadastros.Departamento</class>
 	<class>com.andreitoledo.financeiro.compras.model.cadastros.EmpresaUsuaria</class>
@@ -26,19 +27,17 @@
 	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.Produto</class>
 	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.SecaoProduto</class>
 	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.SubgrupoProduto</class>
-	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.UnidadeMedida</class>	   
-	   
+	<class>com.andreitoledo.financeiro.compras.model.cadastros.produto.UnidadeMedida</class>
+		
 	
-		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/financeiro_compras"/>
-			<property name="javax.persistence.jdbc.user" value="root"/>
-			<property name="javax.persistence.jdbc.password" value="root"/>
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-			
+		<properties>			
 			<!-- validate | update | create | create-drop -->
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.format_sql" value="true"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+			
+			<!-- <property name="hibernate.connection.datasource" value="jdbc/FinanceiroDB"/> -->
 		</properties>
 	</persistence-unit>
 	

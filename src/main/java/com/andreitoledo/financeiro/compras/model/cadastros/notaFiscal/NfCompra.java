@@ -39,7 +39,11 @@ import com.andreitoledo.financeiro.compras.model.cadastros.produto.Produto;
 		+ " left join fetch nfc.entidade "
 		+ " left join fetch nfc.entidadeEntrega "
 		+ " left join fetch nfc.entidadeTransporte "
-		+ " left join fetch nfc.entidadeFornecedor ") })
+		+ " left join fetch nfc.entidadeFornecedor "),	
+	@NamedQuery(name = "NfCompra.buscarPorStatusEmitido", query = " select nfc from NfCompra nfc "
+			+ "WHERE nfc.status = com.andreitoledo.financeiro.compras.model.cadastros.notaFiscal.StatusPedido.EMITIDO "),
+})
+
 @Table(name = "nf_compra")
 public class NfCompra implements Serializable {
 

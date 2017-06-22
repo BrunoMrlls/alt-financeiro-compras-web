@@ -5,9 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceException;
-import javax.persistence.StoredProcedureQuery;
 
 import com.andreitoledo.financeiro.compras.model.cadastros.notaFiscal.NfCompra;
 import com.andreitoledo.financeiro.compras.service.NegocioException;
@@ -30,9 +28,14 @@ public class NfCompraDAO implements Serializable {
 		return manager.createNamedQuery("NfCompra.buscarTodos").getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<NfCompra> buscarNfcompraPorStatusEmitido() {
+		return manager.createNamedQuery("NfCompra.buscarPorStatusEmitido").getResultList();
+	}
+
 	public void salvar(NfCompra nfCompra) {
 		manager.merge(nfCompra);
-		
+
 	}
 
 	@Transactional
@@ -44,27 +47,10 @@ public class NfCompraDAO implements Serializable {
 			manager.flush();
 
 		} catch (PersistenceException e) {
-			throw new NegocioException(
-					"Esta Nota de Compra não pode ser excluído.");
+			throw new NegocioException("Esta Nota de Compra não pode ser excluído.");
 
 		}
 
-	}	 
-	
-/*	public void salvarTituloPagar(NfCompra nfCompra) {		
-			
-			StoredProcedureQuery storedProcedure = manager.createStoredProcedureQuery("spInserirTitulosPagar");
-			//storedProcedure.registerStoredProcedureParameter("codigoPedido", Long.class, ParameterMode.IN);
-			//storedProcedure.setParameter("codigoPedido", 1L);
-			
-			storedProcedure.registerStoredProcedureParameter("codigoPedido", Long.class, ParameterMode.IN);			
-			
-			storedProcedure.setParameter("codigoPedido", nfCompra);						
-			
-			storedProcedure.execute();
-
-	}	*/
-	
-	
+	}
 
 }

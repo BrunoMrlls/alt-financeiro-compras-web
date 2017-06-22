@@ -37,8 +37,6 @@ public class EmissaoPedidoNfCompraService implements Serializable {
 		nfCompra.setStatus(StatusPedido.EMITIDO);
 
 		this.nfCompraDAO.salvar(nfCompra);
-		
-		/*this.nfCompraDAO.salvarTituloPagar(nfCompra);*/
 
 		return nfCompra;
 

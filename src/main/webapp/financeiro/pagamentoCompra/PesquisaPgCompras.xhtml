@@ -10,13 +10,13 @@
 	<ui:define name="content">
 		<h:form id="frmPesquisa">
 			<h2>
-				Pagamentos: <SMALL>manutenção de pagamentos notas de compra</SMALL>
+				Pagamentos: <SMALL>listagem de notas de compra</SMALL>
 			</h2>
 
-			<p:messages id="messages" autoUpdate="true" closable="true" />			
+			<p:messages id="messages" autoUpdate="true" closable="true" />
 
 			<p:dataTable id="nfComprasTable"
-				value="#{pesquisaNfCompraBean.nfCompras}" var="nfCompra"
+				value="#{pesquisaPgCompraBean.nfCompras}" var="nfCompra"
 				style="margin-top: 20px"
 				emptyMessage="Nenhuma Nota de Compra encontrado." rows="10"
 				paginator="true" paginatorAlwaysVisible="true"
@@ -43,64 +43,39 @@
 					filterBy="#{nfCompra.status.descricao}" priority="5">
 					<h:outputText value="#{nfCompra.status.descricao}" />
 				</p:column>
-				
+
 				<p:column headerText="Data de Emissão"
 					filterBy="#{nfCompra.dataEmissao}" sortBy="#{nfCompra.dataEmissao}"
 					priority="6">
 					<h:outputText value="#{nfCompra.dataEmissao}" />
 				</p:column>
-				
+
 				<p:column headerText="Status Pagto"
 					filterBy="#{nfCompra.statusPgto.descricao}" priority="4">
 					<h:outputText value="#{nfCompra.statusPgto.descricao}" />
 				</p:column>
-				
+
 				<p:column headerText="Data de Pagamento"
-					filterBy="#{nfCompra.dataPagamento}" sortBy="#{nfCompra.dataPagamento}"
-					priority="7">
+					filterBy="#{nfCompra.dataPagamento}"
+					sortBy="#{nfCompra.dataPagamento}" priority="7">
 					<h:outputText value="#{nfCompra.dataPagamento}" />
-				</p:column>				
+				</p:column>
 
 				<p:column headerText="Empresa Usuária"
 					filterBy="#{nfCompra.empresaUsuaria.nomeFantasia}"
 					sortBy="#{nfCompra.empresaUsuaria.nomeFantasia}" priority="8">
 					<h:outputText value="#{nfCompra.empresaUsuaria.nomeFantasia}" />
 				</p:column>
-								
 
 				<!-- botões de ação -->
-
+				
 				<p:column width="15%" style="text-align: center" headerText="ações">
 					<p:button outcome="PagamentoNfCompra" icon="ui-icon-calculator"
 						title="Pagar">
 						<f:param name="nfCompra" value="#{nfCompra.codigo}" />
 					</p:button>
-				</p:column>					
-					
-					
-					<!-- <p:spacer width="10" />
-
-					<p:column style="width: 100px; text-align: center">
-						<p:button outcome="CadastroPgCompra" icon="ui-icon-pencil"
-							title="Editar">
-							<f:param name="nfCompra" value="#{nfCompra.codigo}" />
-						</p:button>
-					</p:column>
-					
-					<p:spacer width="10" />
-
-					bloco exclusão
-
-					<p:commandButton icon="ui-icon-trash" title="Excluir"
-						oncomplete="PF('confirmacaoExclusao').show()" process="@this"
-						update=":frmPesquisa:confirmacaoExclusaoDialog">
-						<f:setPropertyActionListener
-							target="#{pesquisaNfCompraBean.nfCompraSelecionado}"
-							value="#{nfCompra}" />
-					</p:commandButton>
-
 				</p:column>
- -->
+
 			</p:dataTable>
 
 			<!-- confirmação exclusão -->
